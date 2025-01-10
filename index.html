@@ -139,11 +139,15 @@
 
     <!-- Main Content Area -->
     <div class="main-content">
-      <h2>Ethereal CMD News Feed</h2>
-      <div id="news-feed">
-      <!-- News items will be dynamically loaded here -->
+        <h2>Ethereal CMD News Feed</h2>
+        <div class="news-container">
+          <!-- News articles will be dynamically loaded here -->
+        </div>
       </div>
     </div>
+
+ 
+
   </div>
 
   <script>
@@ -177,17 +181,19 @@
       })
       .catch(error => console.error('Error fetching members:', error));
 
-      // Fetch and Display News Items from news.html
       fetch('news.html')
-      .then(response => response.text())
-      .then(html => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const newsItems = doc.querySelectorAll('.news-item');
-        const newsFeed = document.getElementById('news-feed');
-        newsItems.forEach(item => newsFeed.appendChild(item.cloneNode(true)));
-      })
-      .catch(error => console.error('Error fetching news:', error));
+  .then(response => response.text())
+  .then(html => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const newsArticles = doc.querySelectorAll('.news-article');
+    const newsContainer = document.querySelector('.news-container');
+    newsArticles.forEach(article => {
+      newsContainer.appendChild(article.cloneNode(true));
+    });
+  })
+  .catch(error => console.error('Error fetching news:', error));
+
   </script>
   
         

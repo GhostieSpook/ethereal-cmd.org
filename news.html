@@ -3,20 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News</title>
+    <title>Ethereal Command News</title>
     <link rel="stylesheet" href="/styles.css">
+
 </head>
 <body>
-    <header>
-        <h1>Latest News</h1>
-    </header>
-    <main>
-        <article>
-            <h2>News Title 1</h2>
-            <p>Date: 2023-10-01</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non urna vitae libero bibendum tincidunt.</p>
-        </article>
-        <article>
-            <h2>News Title 2</h2>
-            <p>Date: 2023-10-02</p>
-            <p>Quisque sit amet est et sapien ullamcorper
+    <!-- Navbar -->
+    <div id="header"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+                fetch("header.html")
+                        .then((response) => response.text())
+                        .then((html) => {
+                                document.getElementById("header").innerHTML = html;
+                        })
+                        .catch((error) => {
+                                console.error("Error loading header:", error);
+                        });
+        });
+    </script>
+
+    <!-- News Section -->
+    <div class="container">
+        <div class="main-content">
+            <h2 style="text-align: center;">News</h2>
+            <div class="news-container">
+                <!-- News Article 1 -->
+                <div class="news-article">
+                    <img src="news1.jpg" alt="News Image">
+                    <h3>News Title</h3>
+                    <p>Published on: January 10, 2025</p>
+                    <p>Short description of the news...</p>
+                  </div>
+                <!-- News Article 2 -->
+                <div class="news-article">
+                    <img src="news1.jpg" alt="News Image">
+                    <h3>News Title</h3>
+                    <p>Published on: January 10, 2025</p>
+                    <p>Short description of the news...</p>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Ethereal Command</p>
+        <p>
+            <a href="https://robertsspaceindustries.com/orgs/ETHR">RSI Page</a>
+            <a href="https://discord.gg/XvwJ45FDdv">Discord</a>
+        </p>
+        <p>
+            This site is not endorsed by or affiliated with the Cloud Imperium or Roberts Space Industries group of companies.
+            All game content and materials are copyright Cloud Imperium Rights LLC and Cloud Imperium Rights Ltd.
+            Star Citizen&reg;, Squadron 42&reg;, Roberts Space Industries&reg;, and Cloud Imperium&reg; are registered trademarks of Cloud Imperium Rights LLC. All rights reserved.
+        </p>
+    </footer>
+</body>
+</html>
