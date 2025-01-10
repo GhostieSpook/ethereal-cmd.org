@@ -1,2 +1,2 @@
 # ethereal-cmd.org
-Website for my Star CItizen Org
+Website for my Star Citizen Org
