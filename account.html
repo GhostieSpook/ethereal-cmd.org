@@ -57,26 +57,25 @@
 
   <!-- JavaScript to Fetch and Display Profile Data -->
   <script>
-    async function loadProfile() {
-      try {
-        const response = await fetch('https://ethereal-cmd.org/api/account', {
-          credentials: 'include'
-        });
-        const userInfo = await response.json();
-
-
-        // Update profile elements with the fetched data
-        document.getElementById('user-name').textContent = userInfo.name || 'Anonymous';
-        document.getElementById('user-email').textContent = userInfo.email || 'Unknown';
-        document.getElementById('profile-avatar').src = userInfo.avatar || 'default-avatar.png';
-        document.getElementById('user-about').textContent = userInfo.about || 'No bio available.';
-        document.getElementById('user-activity').textContent = userInfo.activity || 'No recent activity.';
-      } catch (error) {
-        console.error('Failed to load profile:', error);
+  fetch("/api/account")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to fetch profile data");
       }
-    }
+      return response.json();
+    })
+    .then((data) => {
+      // Dynamically update the profile page
+      document.getElementById("profile-name").textContent = data.name;
+      document.getElementById("profile-email").textContent = data.email;
+      document.getElementById("profile-about").textContent = data.about;
+      document.getElementById("profile-activity").textContent = data.activity;
+      document.getElementById("profile-avatar").src = data.avatar;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+</script>
 
-    window.onload = loadProfile;
-  </script>
 </body>
 </html>
