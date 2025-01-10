@@ -5,26 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Profile</title>
   <link rel="stylesheet" href="styles.css">
-  <script>
-    async function loadProfile() {
-      try {
-        // Fetch user data via a proxy or directly if headers are exposed
-        const response = await fetch('/user-info-endpoint', { credentials: 'include' });
-        const userInfo = await response.json();
-
-        // Dynamically update the page
-        document.getElementById('user-name').textContent = userInfo.name || 'Anonymous';
-        document.getElementById('user-email').textContent = userInfo.email || 'Unknown';
-        document.getElementById('profile-avatar').src = userInfo.avatar || 'default-avatar.png';
-      } catch (error) {
-        console.error('Failed to load user profile:', error);
-      }
-    }
-
-    window.onload = loadProfile;
-  </script>
 </head>
 <body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div>
+      <a href="/index.html">Home</a>
+      <a href="/members.html">Members</a>
+      <a href="/events.html">Events</a>
+      <a href="/divisions.html">Divisions</a>
+      <div class="dropdown">
+        <a href="/fleets.html">Fleets</a>
+        <div class="dropdown-content">
+          <a href="/fleets/first-fleet.html">First Fleet</a>
+        </div>
+    </div>
+      <a href="#">Training</a>
+      <a href="#">Library</a>
+      <div class="dropdown">
+        <span>Information</span>
+        <div class="dropdown-content">
+          <a href="/bank.html">Bank</a>
+        </div>
+      </div>
+      <a href="#">Forum</a>
+    </div>
+    <div class="navbar-right">
+    <a href="/account.html">👤</a>
+    <a href="#">🔔</a>
+    </div>
+  </div>
+  
   <div class="profile-container">
     <div class="profile-header">
       <img id="profile-avatar" src="default-avatar.png" alt="User Avatar">
@@ -35,8 +46,34 @@
     </div>
     <div class="profile-content">
       <h2>About</h2>
-      <p>This is the user's profile page. Details are dynamically loaded after login.</p>
+      <p id="user-about">Fetching user information...</p>
+      <h2>Activity</h2>
+      <p id="user-activity">No recent activity.</p>
     </div>
   </div>
+  <footer>
+    <p>&copy; 2019 Vanguard Organization</p>
+  </footer>
+
+  <!-- JavaScript to Fetch and Display Profile Data -->
+  <script>
+    async function loadProfile() {
+      try {
+        const response = await fetch('https://ethereal-cmd.org/api/account');
+        const userInfo = await response.json();
+
+        // Update profile elements with the fetched data
+        document.getElementById('user-name').textContent = userInfo.name || 'Anonymous';
+        document.getElementById('user-email').textContent = userInfo.email || 'Unknown';
+        document.getElementById('profile-avatar').src = userInfo.avatar || 'default-avatar.png';
+        document.getElementById('user-about').textContent = userInfo.about || 'No bio available.';
+        document.getElementById('user-activity').textContent = userInfo.activity || 'No recent activity.';
+      } catch (error) {
+        console.error('Failed to load profile:', error);
+      }
+    }
+
+    window.onload = loadProfile;
+  </script>
 </body>
 </html>
