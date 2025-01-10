@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethereal Command Events</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .events-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .event {
+      width: 80%;
+      padding: 20px;
+      background-color: #292929;
+      border-radius: 8px;
+      border: 1px solid #444;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: left;
+    }
+
+    .event + .event {
+      border-top: 2px solid #444;
+    }
+
+    .event img {
+      max-width: 100px;
+      margin-right: 20px;
+    }
+
+    .event div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .event h3 {
+      margin-bottom: 10px;
+    }
+
+    .countdown {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div>
+      <a href="/index.html">Home</a>
+      <a href="/members.html">Members</a>
+      <a href="/events.html">Events</a>
+      <a href="/divisions.html">Divisions</a>
+      <div class="dropdown">
+        <a href="/fleets.html">Fleets</a>
+        <div class="dropdown-content">
+          <a href="/fleets/first-fleet.html">First Fleet</a>
+        </div>
+    </div>
+      <a href="#">Training</a>
+      <a href="#">Library</a>
+      <div class="dropdown">
+        <span>Information</span>
+        <div class="dropdown-content">
+          <a href="/bank.html">Bank</a>
+        </div>
+      </div>
+      <a href="#">Forum</a>
+    </div>
+    <div class="navbar-right">
+    <a href="#">👤</a>
+    <a href="#">🔔</a>
+    </div>
+  </div>
+
+  <!-- Events Section -->
+  <div class="container">
+    <div class="main-content">
+      <h2 style="text-align: center;">Events</h2>
+      <div class="events-container">
+        <!-- Event 1 -->
+        <!--<div class="event">
+          <img src="event1.png" alt="Test Event">
+          <div>
+            <h3>Title</h3>
+            <p>Desc</p>
+            <p class="countdown">DAYS HOURS MINUTES SECONDS</p>
+            <p>Location:</p>
+            <p><strong>Start:</strong> Fri, 1/10/25, 2:00 PM MST</p>
+            <p><strong>End:</strong> Fri, 1/10/25, 4:00 PM MST</p>
+            <!--<button>Share</button>
+            <button>Go</button>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 Ethereal Command</p>
+    <p>
+      <a href="https://robertsspaceindustries.com/orgs/ETHR">RSI Page</a>
+      <a href="https://discord.gg/XvwJ45FDdv">Discord</a>
+    </p>
+    <p>
+      This site is not endorsed by or affiliated with the Cloud Imperium or Roberts Space Industries group of companies.
+      All game content and materials are copyright Cloud Imperium Rights LLC and Cloud Imperium Rights Ltd.
+      Star Citizen&reg;, Squadron 42&reg;, Roberts Space Industries&reg;, and Cloud Imperium&reg; are registered trademarks of Cloud Imperium Rights LLC. All rights reserved.
+    </p>
+  </footer>
+</body>
+</html>

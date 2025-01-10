@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    async function loadProfile() {
+      try {
+        // Fetch user data via a proxy or directly if headers are exposed
+        const response = await fetch('/user-info-endpoint', { credentials: 'include' });
+        const userInfo = await response.json();
+
+        // Dynamically update the page
+        document.getElementById('user-name').textContent = userInfo.name || 'Anonymous';
+        document.getElementById('user-email').textContent = userInfo.email || 'Unknown';
+        document.getElementById('profile-avatar').src = userInfo.avatar || 'default-avatar.png';
+      } catch (error) {
+        console.error('Failed to load user profile:', error);
+      }
+    }
+
+    window.onload = loadProfile;
+  </script>
+</head>
+<body>
+  <div class="profile-container">
+    <div class="profile-header">
+      <img id="profile-avatar" src="default-avatar.png" alt="User Avatar">
+      <div>
+        <h1 id="user-name">Loading...</h1>
+        <p id="user-email">Loading...</p>
+      </div>
+    </div>
+    <div class="profile-content">
+      <h2>About</h2>
+      <p>This is the user's profile page. Details are dynamically loaded after login.</p>
+    </div>
+  </div>
+</body>
+</html>

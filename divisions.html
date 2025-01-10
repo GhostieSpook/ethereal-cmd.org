@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethereal Command Divisions</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px;
+    }
+
+    .division-section {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+      text-align: center;
+    }
+
+    .division-card {
+      background-color: #292929;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #fff;
+    }
+
+    .division-card img {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 10px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div>
+      <a href="/index.html">Home</a>
+      <a href="/members.html">Members</a>
+      <a href="/events.html">Events</a>
+      <a href="/divisions.html">Divisions</a>
+      <div class="dropdown">
+        <a href="/fleets.html">Fleets</a>
+        <div class="dropdown-content">
+          <a href="/fleets/first-fleet.html">First Fleet</a>
+        </div>
+    </div>
+      <a href="#">Training</a>
+      <a href="#">Library</a>
+      <div class="dropdown">
+        <span>Information</span>
+        <div class="dropdown-content">
+          <a href="/bank.html">Bank</a>
+        </div>
+      </div>
+      <a href="#">Forum</a>
+    </div>
+    <div class="navbar-right">
+    <a href="#">👤</a>
+    <a href="#">🔔</a>
+    </div>
+  </div>
+
+  <!-- Divisions Section -->
+  <div class="container">
+    <h1>Divisions</h1>
+    <div class="division-section">
+      <div class="division-card">
+        <img src="path/to/command.png" alt="Wardens Logo">
+        <h3>Wardens</h3>
+      </div>
+
+      <div class="division-card">
+        <img src="assets/divisions/trade-and-logistics.png" alt="Trade & Logistics Logo">
+        <h3>Trade & Logistics</h3>
+      </div>
+
+      <div class="division-card">
+        <img src="path/to/industries.png" alt="Forge & Salvage Logo">
+        <h3>Forge & Salvage</h3>
+      </div>
+
+      <div class="division-card">
+        <img src="path/to/initiative.png" alt="Pathfinders Logo">
+        <h3>Pathfinders</h3>
+      </div>
+
+      <div class="division-card">
+        <img src="path/to/medtech.png" alt="Trauma Corps Logo">
+        <h3>Trauma Corps</h3>
+      </div>
+
+      <div class="division-card">
+        <img src="path/to/security.png" alt="Enforcers Logo">
+        <h3>Enforcers</h3>
+      </div>
+    </div>
+  </div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 Ethereal Command</p>
+    <p>
+      <a href="https://robertsspaceindustries.com/orgs/ETHR">RSI Page</a>
+      <a href="https://discord.gg/XvwJ45FDdv">Discord</a>
+    </p>
+    <p>
+      This site is not endorsed by or affiliated with the Cloud Imperium or Roberts Space Industries group of companies.
+      All game content and materials are copyright Cloud Imperium Rights LLC and Cloud Imperium Rights Ltd.
+      Star Citizen&reg;, Squadron 42&reg;, Roberts Space Industries&reg;, and Cloud Imperium&reg; are registered trademarks of Cloud Imperium Rights LLC. All rights reserved.
+    </p>
+  </footer>
+  
+</body>
+</html>

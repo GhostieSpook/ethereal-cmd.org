@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethereal Command Bank</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div>
+      <a href="/index.html">Home</a>
+      <a href="/members.html">Members</a>
+      <a href="/events.html">Events</a>
+      <a href="/divisions.html">Divisions</a>
+      <div class="dropdown">
+        <a href="/fleets.html">Fleets</a>
+        <div class="dropdown-content">
+          <a href="/fleets/first-fleet.html">First Fleet</a>
+        </div>
+    </div>
+      <a href="#">Training</a>
+      <a href="#">Library</a>
+      <div class="dropdown">
+        <span>Information</span>
+        <div class="dropdown-content">
+          <a href="/bank.html">Bank</a>
+        </div>
+      </div>
+      <a href="#">Forum</a>
+    </div>
+    <div class="navbar-right">
+    <a href="#">👤</a>
+    <a href="#">🔔</a>
+    </div>
+  </div>
+
+  <!-- Bank Section -->
+  <div class="bank-container">
+    <h2 style="text-align: center;">Ethereal Bank</h2>
+
+    <!-- Balances -->
+    <div class="balance-bar">
+      <span>1,000 aUEC</span>
+      <div class="progress">
+        <div class="progress-bar" style="width: 1%;"></div>
+      </div>
+      <span>500,000,000 aUEC</span>
+    </div>
+
+    <div class="balance-bar">
+      <span>0 Merits</span>
+      <div class="progress">
+        <div class="progress-bar" style="width: 0%; background-color: #ffaa00;"></div>
+      </div>
+      <span>500,000 Merits</span>
+    </div>
+
+    <p>Screenshot any transactions to <strong>ethereal-bank</strong> using mo.Trader in-game and report using <strong>New Income</strong></p>
+
+    <!-- New Income Button -->
+    <button class="new-income-btn" onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSdNway7DsAbZm-R5Fwd9b_P_X-mfcuOQH6W3FLWEvezLw9n3Q/viewform?usp=dialog'">New Income</button>
+
+    <!-- Transactions Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Name</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <tr>
+          <td>Date m/d/y</td>
+          <td>Name</td>
+          <td>Ammount aUEC</td>
+          <td>Desc</td>
+        </tr> -->
+        <!-- Additional transactions can be added here -->
+         <tr>
+          <td>1/10/25</td>
+          <td>GhostieSpook</td>
+          <td style="color: green;">1,000 aUEC</td>
+          <td>Test</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 Ethereal Command</p>
+    <p>
+      <a href="https://robertsspaceindustries.com/orgs/ETHR">RSI Page</a>
+      <a href="https://discord.gg/XvwJ45FDdv">Discord</a>
+    </p>
+    <p>
+      This site is not endorsed by or affiliated with the Cloud Imperium or Roberts Space Industries group of companies.
+      All game content and materials are copyright Cloud Imperium Rights LLC and Cloud Imperium Rights Ltd.
+      Star Citizen&reg;, Squadron 42&reg;, Roberts Space Industries&reg;, and Cloud Imperium&reg; are registered trademarks of Cloud Imperium Rights LLC. All rights reserved.
+    </p>
+  </footer>  
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethereal Command Members</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+     .members-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div>
+      <a href="/index.html">Home</a>
+      <a href="/members.html">Members</a>
+      <a href="/events.html">Events</a>
+      <a href="/divisions.html">Divisions</a>
+      <div class="dropdown">
+        <a href="/fleets.html">Fleets</a>
+        <div class="dropdown-content">
+          <a href="/fleets/first-fleet.html">First Fleet</a>
+        </div>
+    </div>
+      <a href="#">Training</a>
+      <a href="#">Library</a>
+      <div class="dropdown">
+        <span>Information</span>
+        <div class="dropdown-content">
+          <a href="/bank.html">Bank</a>
+        </div>
+      </div>
+      <a href="#">Forum</a>
+    </div>
+    <div class="navbar-right">
+    <a href="#">👤</a>
+    <a href="#">🔔</a>
+    </div>
+  </div>
+
+  <!-- Search Bar -->
+  <!-- <div class="search-bar">
+    <input type="text" placeholder="Search members..." id="member-search">
+  </div> -->
+
+  <!-- Members Grid -->
+  <div class="members-container">
+    
+    <!-- <div class="member-card">
+      <img src="assets/fleets/" alt="Fleet Name">
+      <h3>Fleet Name</h3>
+      <p>Rank</p>
+      <a href="#">Go</a>
+    </div> -->
+    
+    <div class="member-card">
+      <img src="assets/fleets/first-fleet.png" alt="First Fleet">
+      <h3>First Fleet</h3>
+      <p>Command</p>
+    </div>
+    <div class="member-card">
+      <img src="assets/fleets/lifeblood-corps" alt="Lifeblood Corps">
+      <h3>Lifeblood Corps</h3>
+      <p>Medical</p>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Ethereal Command</p>
+    <p>
+      <a href="https://robertsspaceindustries.com/orgs/ETHR">RSI Page</a>
+      <a href="https://discord.gg/XvwJ45FDdv">Discord</a>
+    </p>
+    <p>
+      This site is not endorsed by or affiliated with the Cloud Imperium or Roberts Space Industries group of companies.
+      All game content and materials are copyright Cloud Imperium Rights LLC and Cloud Imperium Rights Ltd.
+      Star Citizen&reg;, Squadron 42&reg;, Roberts Space Industries&reg;, and Cloud Imperium&reg; are registered trademarks of Cloud Imperium Rights LLC. All rights reserved.
+    </p>
+  </footer>
+</body>
+</html>
