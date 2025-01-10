@@ -69,6 +69,38 @@
     .news-item p {
       color: #aaa;
     }
+
+    .member-card {
+  display: flex;
+  align-items: center; /* Aligns items (image and text) vertically */
+}
+
+.member-card img {
+  border-radius: 50%;
+  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+  align-self: flex-start; /* Ensures the image aligns with the start of the text block */
+}
+
+.member-card .member-info {
+  display: flex;
+  flex-direction: column; /* Stacks the h3 and p elements vertically */
+  justify-content: center; /* Centers the text vertically relative to the image */
+}
+
+.member-card h3 {
+  margin: 0;
+  font-size: 16px; /* Adjust font size */
+}
+
+.member-card p {
+  margin: 0;
+  padding: 5px;
+  font-size: 14px; /* Slightly smaller than h3 for hierarchy */
+  color: #ccc; /* Optional lighter color for the role */
+}
+
   </style>
 </head>
 <body>
@@ -96,7 +128,16 @@
       <a href="#">Forum</a>
     </div>
     <div class="navbar-right">
+<<<<<<< HEAD
     <a href="/account.html">👤</a>
+=======
+    <div class="dropdown">
+      <a href="/account.html">👤</a>
+      <div class="dropdown-content">
+        <a href="https://ethereal-cmd.cloudflareaccess.com/cdn-cgi/access/logout">Log Out</a>
+      </div>
+  </div>
+>>>>>>> 36e4e39d3f90b6079e33daad8ad8920008c91d43
     <a href="#">🔔</a>
     </div>
   </div>
@@ -116,19 +157,7 @@
     <div class="members-container">
       <!-- Latest members will be dynamically loaded here -->
     </div>
-    <style>
-      .member-card {
-        display: flex;
-        align-items: center;
-      }
-
-      .member-card img {
-        border-radius: 50%;
-        margin-right: 10px;
-        width: 50px;
-        height: 50px;
-      }
-    </style>
+      
     </div>
 
     <!-- Main Content Area -->
