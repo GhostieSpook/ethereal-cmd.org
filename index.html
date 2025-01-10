@@ -104,39 +104,20 @@
   </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <div class="navbar">
-    <div>
-      <a href="/index.html">Home</a>
-      <a href="/members.html">Members</a>
-      <a href="/events.html">Events</a>
-      <a href="/divisions.html">Divisions</a>
-      <div class="dropdown">
-        <a href="/fleets.html">Fleets</a>
-        <div class="dropdown-content">
-          <a href="/fleets/first-fleet.html">First Fleet</a>
-        </div>
-    </div>
-      <a href="#">Training</a>
-      <a href="#">Library</a>
-      <div class="dropdown">
-        <span>Information</span>
-        <div class="dropdown-content">
-          <a href="/bank.html">Bank</a>
-        </div>
-      </div>
-      <a href="#">Forum</a>
-    </div>
-    <div class="navbar-right">
-      <div class="dropdown">
-        <span>👤</span>
-        <div class="dropdown-content">
-          <a href="https://ethereal-cmd.cloudflareaccess.com/cdn-cgi/access/logout">Log Out</a>
-        </div>
-    </div>
-      <a href="#">🔔</a>
-    </div>
-  </div>
+
+  <div id="header"></div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch("header.html")
+            .then((response) => response.text())
+            .then((html) => {
+                document.getElementById("header").innerHTML = html;
+            })
+            .catch((error) => {
+                console.error("Error loading header:", error);
+            });
+    });
+</script>
 
   <!-- Main Content -->
   <div class="container">
@@ -159,18 +140,9 @@
     <!-- Main Content Area -->
     <div class="main-content">
       <h2>Ethereal CMD News Feed</h2>
-
-      <!-- <div class="news-item">
-        <h3>Congratulations</h3>
-        <p>Congratulations to all who got promoted last night...</p>
-        <p>289 views | 2 comments</p>
-      </div> -->
-
-      <div class="news-item">
-        <h3>Website Created</h3>
-        <p>Website has been launched and the Org created!</p>
+      <div id="news-feed">
+      <!-- News items will be dynamically loaded here -->
       </div>
-
     </div>
   </div>
 
@@ -204,7 +176,20 @@
         });
       })
       .catch(error => console.error('Error fetching members:', error));
+
+      // Fetch and Display News Items from news.html
+      fetch('news.html')
+      .then(response => response.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const newsItems = doc.querySelectorAll('.news-item');
+        const newsFeed = document.getElementById('news-feed');
+        newsItems.forEach(item => newsFeed.appendChild(item.cloneNode(true)));
+      })
+      .catch(error => console.error('Error fetching news:', error));
   </script>
+  
         
         <!-- Footer -->
   <footer>
