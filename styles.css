@@ -302,46 +302,32 @@ html, body {
   background-color: #666;
 }
 
-.events-container {
+#events-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+  padding: 10px;
+  background-color: #292929;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .event {
-  width: 80%;
-  padding: 20px;
-  background-color: #292929;
-  border-radius: 8px;
-  border: 1px solid #444;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: left;
-}
-
-.event + .event {
-  border-top: 2px solid #444;
-}
-
-.event img {
-  max-width: 100px;
-  margin-right: 20px;
-}
-
-.event div {
-  display: flex;
-  flex-direction: column;
+  padding: 15px;
+  background-color: #333;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .event h3 {
-  margin-bottom: 10px;
+  margin: 0 0 10px;
+  font-size: 1.2rem;
 }
 
-.countdown {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-button {
-  margin-right: 10px;
+.event p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #bbb;
 }

@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ethereal Command Events</title>
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Navbar -->
   <div id="header"></div>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -21,50 +20,19 @@
             });
     });
 </script>
+  <!-- Header -->
+  <div id="header"></div>
 
-  
-
-
-
-
-      </div>
+  <!-- Main Content -->
+  <div class="container">
+    <h1 style="text-align: center;">Upcoming Events</h1>
+    <div id="events-container">
+      <p>Loading events...</p> <!-- Placeholder text while events are fetched -->
     </div>
   </div>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const events = document.querySelectorAll(".event");
 
-    events.forEach((event) => {
-    const countdownElement = event.querySelector(".countdown");
-    const eventDate = event.getAttribute("data-event-date");
-    const eventTime = event.getAttribute("data-event-time");
-    const eventTimezone = event.getAttribute("data-event-timezone");
-    const eventDateTime = new Date(`${eventDate}T${eventTime}:00`).getTime();
-
-    function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = eventDateTime - now;
-
-    if (distance < 0) {
-      countdownElement.innerHTML = "Event has started!";
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-    });
-    });
-  </script>
-<!-- Footer -->
-<footer>
+  <!-- Footer -->
+  <footer>
     <p>&copy; 2025 Ethereal Command</p>
     <p>
       <a href="https://robertsspaceindustries.com/orgs/ETHR">RSI Page</a>
@@ -76,5 +44,7 @@
       Star Citizen&reg;, Squadron 42&reg;, Roberts Space Industries&reg;, and Cloud Imperium&reg; are registered trademarks of Cloud Imperium Rights LLC. All rights reserved.
     </p>
   </footer>
+
+  <script src="events.js"></script>
 </body>
 </html>
