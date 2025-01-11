@@ -25,17 +25,20 @@
       margin-bottom: 10px;
     }
 
-    .members-container, .events-container {
-      margin-top: 10px;
-    }
-
-    .member-card {
-      background-color: #333;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      color: #fff;
-    }
+    .members-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .member-box {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #292929;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
     .events-container .event {
       margin-bottom: 20px;
@@ -100,7 +103,17 @@
   font-size: 14px; /* Slightly smaller than h3 for hierarchy */
   color: #ccc; /* Optional lighter color for the role */
 }
+.members-container, .events-container {
+      margin-top: 10px;
+    }
 
+    .member-card {
+      background-color: #333;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
@@ -130,10 +143,12 @@
       <div class="events-container" id="events"></div>
 
       <!-- Newest Members -->
-    <h3>Newest Members</h3>
-    <div class="members-container">
-      <!-- Latest members will be dynamically loaded here -->
-    </div>
+
+        <h2>Newest Members</h2>
+        <div id="newest-members" class="members-container">
+          <!-- Latest members will be dynamically loaded here -->
+      </div>
+      
       
     </div>
 
@@ -164,22 +179,42 @@
       .catch(error => console.error('Error fetching events:', error));
 
     // Fetch and Display the Latest 5 Members from members.html
-    fetch('members.html')
-      .then(response => response.text())
-      .then(html => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const members = doc.querySelectorAll('.member-card');
-        const newestMembers = Array.from(members).slice(0, 5); // Get the latest 5 members
-        const newestMembersContainer = document.querySelector('.members-container');
+    async function fetchMembers() {
+      try {
+        const apiKey = 'b344c819e7d7b541728be16ec9c00f29';
+        const sid = 'ethr';
+        const apiUrl = `https://api.starcitizen-api.com/${apiKey}/v1/live/organization_members/${sid}`;
+
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        console.log(data); // Log the raw data to the console
+
+        const members = data.data || [];
+
+        const newestMembers = members.slice(0, 5); // Get the newest 5 members
+
+        const membersList = document.getElementById('newest-members');
+        membersList.innerHTML = ''; // Clear loading text
 
         newestMembers.forEach(member => {
-          const memberClone = member.cloneNode(true);
-          memberClone.classList.add('member-card'); // Ensure consistent styling
-          newestMembersContainer.appendChild(memberClone);
+          const listItem = document.createElement('div');
+          listItem.className = 'member-card';
+          listItem.innerHTML = `
+            <img src="${member.image || 'default-image.jpg'}" alt="${member.handle || 'Member'}">
+            <div class="member-info">
+              <h3>${member.handle || 'N/A'}</h3>
+              <p>${member.rank || 'N/A'}</p>
+            </div>
+          `;
+          membersList.appendChild(listItem);
         });
-      })
-      .catch(error => console.error('Error fetching members:', error));
+      } catch (error) {
+        console.error("Error fetching members:", error);
+        document.getElementById('newest-members').textContent = "Failed to load members.";
+      }
+    }
+    fetchMembers();
+
 
       fetch('news.html')
   .then(response => response.text())

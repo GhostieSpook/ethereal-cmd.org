@@ -5,51 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ethereal Command Events</title>
   <link rel="stylesheet" href="/styles.css">
-  <style>
-    .events-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .event {
-      width: 80%;
-      padding: 20px;
-      background-color: #292929;
-      border-radius: 8px;
-      border: 1px solid #444;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      text-align: left;
-    }
-
-    .event + .event {
-      border-top: 2px solid #444;
-    }
-
-    .event img {
-      max-width: 100px;
-      margin-right: 20px;
-    }
-
-    .event div {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .event h3 {
-      margin-bottom: 10px;
-    }
-
-    .countdown {
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    button {
-      margin-right: 10px;
-    }
-  </style>
 </head>
 <body>
   <!-- Navbar -->
@@ -67,29 +22,47 @@
     });
 </script>
 
-  <!-- Events Section -->
-  <div class="container">
-    <div class="main-content">
-      <h2 style="text-align: center;">Events</h2>
-      <div class="events-container">
-        <!-- Event 1 -->
-        <!--<div class="event">
-          <img src="event1.png" alt="Test Event">
-          <div>
-            <h3>Title</h3>
-            <p>Desc</p>
-            <p class="countdown">DAYS HOURS MINUTES SECONDS</p>
-            <p>Location:</p>
-            <p><strong>Start:</strong> Fri, 1/10/25, 2:00 PM MST</p>
-            <p><strong>End:</strong> Fri, 1/10/25, 4:00 PM MST</p>
-            <!--<button>Share</button>
-            <button>Go</button>-->
-          </div>
-        </div>
+  
+
+
+
+
       </div>
     </div>
   </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const events = document.querySelectorAll(".event");
 
+    events.forEach((event) => {
+    const countdownElement = event.querySelector(".countdown");
+    const eventDate = event.getAttribute("data-event-date");
+    const eventTime = event.getAttribute("data-event-time");
+    const eventTimezone = event.getAttribute("data-event-timezone");
+    const eventDateTime = new Date(`${eventDate}T${eventTime}:00`).getTime();
+
+    function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = eventDateTime - now;
+
+    if (distance < 0) {
+      countdownElement.innerHTML = "Event has started!";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+    });
+    });
+  </script>
 <!-- Footer -->
 <footer>
     <p>&copy; 2025 Ethereal Command</p>
