@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ethereal Command Homepage</title>
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/js/blog.js" defer></script>
+  <script src="/js/events.js"></script>
   <style>
   .container {
     display: flex;
@@ -139,7 +142,7 @@
           <p>Loading events...</p> <!-- Placeholder text while events are fetched -->
         </div>
       </div>
-      <script src="events.js"></script>
+
       
     
 
@@ -147,8 +150,9 @@
 
         <h2>Newest Members</h2>
         <div id="newest-members" class="members-container">
-          <!-- Latest members will be dynamically loaded here -->
+          <!-- Newest members will be dynamically loaded here -->
       </div>
+      
       
       
     </div>
@@ -156,9 +160,11 @@
     <!-- Main Content Area -->
     <div class="main-content">
         <h2>Ethereal CMD News Feed</h2>
-        <div class="news-container">
-          <!-- News articles will be dynamically loaded here -->
-        </div>
+        <div id="blog-posts">
+          <h2>Latest Blog Posts</h2>
+          <!-- Blog posts will be dynamically loaded here -->
+      </div>
+            
       </div>
     </div>
 

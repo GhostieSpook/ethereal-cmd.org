@@ -329,3 +329,40 @@ html, body {
   font-size: 1rem;
   color: #bbb;
 }
+
+.blog-post {
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #292929;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+
+.blog-post h3 {
+  margin: 0 0 10px;
+  font-size: 1.25em;
+  color: #fff;
+}
+
+.blog-post a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+.blog-post a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
+.blog-post em {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  color: #aaa;
+}
+
+.blog-post p {
+  font-size: 1em;
+  color: #ccc;
+}
