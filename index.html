@@ -26,13 +26,13 @@
   }
 
   .members-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+    display: flex;
+    flex-direction: column; /* Align items in a column */
+    gap: 20px; /* Space between items */
+    max-width: 300px; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the container */
+    padding: 10px;
+}
 
   .member-box {
     padding: 10px;
@@ -75,22 +75,20 @@
   }
 
   .member-card {
-    display: flex;
-    align-items: center;
-    background-color: #333;
+    display: flex; /* Flex layout for alignment */
+    align-items: center; /* Vertically align image and text */
     padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    color: #fff;
-  }
+    background-color: #292929;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-  .member-card img {
+.member-card img {
     border-radius: 50%;
     margin-right: 10px;
     width: 50px;
     height: 50px;
-    align-self: flex-start;
-  }
+}
 
   .member-card .member-info {
     display: flex;
@@ -99,17 +97,10 @@
     text-align: center; /* Center the text horizontally */
   }
 
-  .member-card h3 {
-    margin: 0;
-    font-size: 16px;
-  }
-
-  .member-card p {
-    margin: 0;
-    padding: 5px;
-    font-size: 14px;
-    color: #ccc;
-  }
+  .member-card h3,
+.member-card p {
+    margin: 0; /* Remove default margins */
+}
 
   .members-container, .events-container {
     margin-top: 10px;
