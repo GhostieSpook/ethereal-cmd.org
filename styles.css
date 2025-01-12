@@ -80,27 +80,29 @@ body {
   .balance-bar {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin: 20px 0;
   }
   
   .balance-bar span {
-    flex: 1;
-    text-align: left;
+    width: 100px; /* Fixed width for text to ensure alignment */
+    text-align: center;
   }
   
+  
   .progress {
-    flex: 3;
+    flex-grow: 1; /* Progress bar takes up remaining space */
+    margin: 0 20px; /* Space between the progress bar and text */
     background-color: #444;
     border-radius: 10px;
-    overflow: hidden;
     height: 20px;
-    margin-left: 10px;
+    overflow: hidden;
   }
   
   .progress-bar {
     height: 100%;
-    background-color: #00aaff;
-    width: 0%;
+    background-color: #007bff;
+    border-radius: 10px;
   }
   
   /* Table Styles */
