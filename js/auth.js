@@ -18,12 +18,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// DOM Elements
-const loginBtn = document.getElementById("login-btn");
-const logoutBtn = document.getElementById("logout-btn");
-const userProfile = document.getElementById("user-profile");
-
-// Login Function
+// Assign login and logout functions to the global window object
 window.login = async function () {
   try {
     await signInWithPopup(auth, provider);
@@ -33,7 +28,6 @@ window.login = async function () {
   }
 };
 
-// Logout Function
 window.logout = async function () {
   try {
     await signOut(auth);
@@ -45,6 +39,10 @@ window.logout = async function () {
 
 // Monitor Auth State
 onAuthStateChanged(auth, (user) => {
+  const loginBtn = document.getElementById("login-btn");
+  const logoutBtn = document.getElementById("logout-btn");
+  const userProfile = document.getElementById("user-profile");
+
   if (user) {
     // User is logged in
     loginBtn.style.display = "none";
