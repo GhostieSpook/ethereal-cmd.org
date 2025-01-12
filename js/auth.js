@@ -1,8 +1,6 @@
-// Import Firebase libraries
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 
-// Your Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDiM4M43xo-oolH9XdQyrgg7agUkMnZeBg",
   authDomain: "ethereal-command-site.firebaseapp.com",
@@ -13,20 +11,19 @@ const firebaseConfig = {
   measurementId: "G-QQSB7ZYHN9"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// Assign login and logout functions to the global window object
 window.login = async function () {
   try {
-    await signInWithPopup(auth, provider);
-    console.log("User signed in successfully.");
+    const result = await signInWithPopup(auth, provider);
+    console.log("Logged in as:", result.user.displayName);
   } catch (error) {
-    console.error("Error signing in:", error);
+    console.error("Login error:", error);
   }
 };
+
 
 window.logout = async function () {
   try {
