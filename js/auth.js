@@ -1,53 +1,63 @@
-let auth0 = null;
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "firebase/auth";
 
-window.onload = async () => {
-    auth0 = await createAuth0Client({
-        domain: "dev-2mx1gr7ts6d14aio.us.auth0.com",
-        client_id: "dTyeFWsbMPv1AO24B1Iz6gF5Tz3O8GDa",
-    });
-
-    console.log("Auth0 initialized:", auth0); // Debug message
-
-    const isAuthenticated = await auth0.isAuthenticated();
-    const loginButton = document.getElementById("login-btn");
-    const logoutButton = document.getElementById("logout-btn");
-
-    if (isAuthenticated) {
-        // User is logged in
-        loginButton.style.display = "none";
-        logoutButton.style.display = "block";
-        const user = await auth0.getUser();
-        document.getElementById("user-profile").textContent = `Welcome, ${user.name}`;
-    } else {
-        // User is logged out
-        loginButton.style.display = "block";
-        logoutButton.style.display = "none";
-    }
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDiM4M43xo-oolH9XdQyrgg7agUkMnZeBg",
+  authDomain: "ethereal-command-site.firebaseapp.com",
+  projectId: "ethereal-command-site",
+  storageBucket: "ethereal-command-site.firebasestorage.app",
+  messagingSenderId: "952627774206",
+  appId: "1:952627774206:web:e00951cf33aaf2deb41baf",
+  measurementId: "G-QQSB7ZYHN9",
 };
 
-// Login function
-async function login() {
-    try {
-        await auth0.loginWithRedirect({
-            redirect_uri: window.location.origin,
-        });
-    } catch (err) {
-        console.error("Login failed", err);
-    }
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+// Login Function
+export function login() {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      const user = result.user;
+      console.log("Logged in user:", user);
+      document.getElementById("login-btn").style.display = "none";
+      document.getElementById("logout-btn").style.display = "block";
+      document.getElementById("user-profile").innerHTML = `Hello, ${user.displayName}`;
+    })
+    .catch((error) => {
+      console.error("Login error:", error);
+    });
 }
 
-async function logout() {
-    try {
-        await auth0.logout({
-            returnTo: window.location.origin,
-        });
-    } catch (err) {
-        console.error("Logout failed", err);
-    }
+// Logout Function
+export function logout() {
+  signOut(auth)
+    .then(() => {
+      console.log("Logged out");
+      document.getElementById("login-btn").style.display = "block";
+      document.getElementById("logout-btn").style.display = "none";
+      document.getElementById("user-profile").innerHTML = "";
+    })
+    .catch((error) => {
+      console.error("Logout error:", error);
+    });
 }
 
-
-auth0
-  .getIdTokenClaims()
-  .then((claims) => console.log("Auth0 Initialized: ", claims))
-  .catch((err) => console.error("Error initializing Auth0: ", err));
+// Listen for Authentication State Changes
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log("User is signed in:", user);
+    document.getElementById("login-btn").style.display = "none";
+    document.getElementById("logout-btn").style.display = "block";
+    document.getElementById("user-profile").innerHTML = `Hello, ${user.displayName}`;
+  } else {
+    console.log("No user is signed in.");
+    document.getElementById("login-btn").style.display = "block";
+    document.getElementById("logout-btn").style.display = "none";
+    document.getElementById("user-profile").innerHTML = "";
+  }
+});

@@ -1,70 +1,31 @@
-  <!-- Navbar -->
-  <div class="navbar">
-    <div>
-      <a href="/index.html">Home</a>
-      <a href="/members.html">Members</a>
-      <a href="/events.html">Events</a>
-      <a href="/divisions.html">Divisions</a>
-      <div class="dropdown">
-        <a href="/fleets.html">Fleets</a>
-        <div class="dropdown-content">
-          <a href="/fleets/first-fleet.html">First Fleet</a>
+<!-- Include Firebase Authentication -->
+<script type="module" src="/js/auth.js"></script>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div>
+    <a href="/index.html">Home</a>
+    <a href="/members.html">Members</a>
+    <a href="/events.html">Events</a>
+    <a href="/divisions.html">Divisions</a>
+    <div class="dropdown">
+      <a href="/fleets.html">Fleets</a>
+      <div class="dropdown-content">
+        <a href="/fleets/first-fleet.html">First Fleet</a>
       </div>
     </div>
     <span style="padding: 0 15px;">Training</span>
-      <span style="padding: 0 15px;">Library</span>
-      <div class="dropdown">
-        <span style="padding: 0 15px;">Information</span>
-        <div class="dropdown-content">
-          <a href="/bank.html">Bank</a>
-        </div>
-      </div>
-      <!-- <a href="#">Forum</a> -->
-    </div>
-    <div class="navbar-right">
+    <span style="padding: 0 15px;">Library</span>
     <div class="dropdown">
-      <a href="/account.html">👤</a>
+      <span style="padding: 0 15px;">Information</span>
       <div class="dropdown-content">
-        <button id="login-btn" style="display: inline;">Login</button>
-        <button id="logout-btn" style="display: none;">Logout</button>
-        <div id="user-profile"></div>
-        <a href="https://ethereal-cmd.cloudflareaccess.com/cdn-cgi/access/logout">Log Out</a>
+        <a href="/bank.html">Bank</a>
       </div>
-  </div>
-  
-  <script src="https://cdn.auth0.com/js/auth0/9.19/auth0.min.js"></script>
-  <script src="/js/auth.js"></script>
-  
-
-  
-  <!-- <a href="#">🔔</a>
-  <div id="notification-popup" class="popup">
-    <div class="popup-content">
-      <span class="close">&times;</span>
-      <div id="notification-info"></div>
     </div>
   </div>
-
-  <script>
-    document.querySelector('.navbar-right a[href="#"]').addEventListener('click', function(event) {
-      event.preventDefault();
-      fetch('/news.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('notification-info').innerHTML = data;
-          document.getElementById('notification-popup').style.display = 'block';
-        });
-    });
-
-    document.querySelector('.popup .close').addEventListener('click', function() {
-      document.getElementById('notification-popup').style.display = 'none';
-    });
-
-    window.addEventListener('click', function(event) {
-      if (event.target == document.getElementById('notification-popup')) {
-        document.getElementById('notification-popup').style.display = 'none';
-      }
-    });
-  </script> -->
+  <div class="navbar-right">
+    <button id="login-btn" onclick="login()">Login</button>
+    <button id="logout-btn" onclick="logout()" style="display: none;">Logout</button>
+    <div id="user-profile"></div>
   </div>
 </div>
