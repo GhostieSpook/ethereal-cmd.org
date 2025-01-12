@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -16,7 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// Function to handle user state changes
+// Authentication state listener
 export function setupAuthStateListeners() {
   const userProfile = document.getElementById("user-profile");
   const loginButton = document.getElementById("login-button");
@@ -25,7 +25,7 @@ export function setupAuthStateListeners() {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log("User logged in:", user.email);
-      userProfile.textContent = `Logged in as: ${user.email}`;
+      userProfile.textContent = `Welcome, ${user.email}`;
       loginButton.style.display = "none";
       logoutButton.style.display = "block";
     } else {
@@ -37,26 +37,13 @@ export function setupAuthStateListeners() {
   });
 }
 
-// Login function
-export async function login(email, password) {
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    console.log("Login successful:", userCredential.user.email);
-    window.location.href = "/index.html"; // Redirect to homepage after login
-  } catch (error) {
-    console.error("Login error:", error.message);
-    alert("Login failed: " + error.message);
-  }
-}
-
 // Logout function
 export async function logout() {
   try {
     await signOut(auth);
-    console.log("Logout successful");
-    window.location.href = "/login.html"; // Redirect to login page after logout
+    console.log("User logged out successfully");
+    window.location.reload(); // Refresh to update UI
   } catch (error) {
     console.error("Logout error:", error.message);
-    alert("Logout failed: " + error.message);
   }
 }

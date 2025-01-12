@@ -10,28 +10,27 @@
         <a href="/fleets/first-fleet.html">First Fleet</a>
       </div>
     </div>
-    <span style="padding: 0 15px;">Training</span>
-    <span style="padding: 0 15px;">Library</span>
+    <a href="/training.html">Training</a>
+    <a href="/library.html">Library</a>
     <div class="dropdown">
-      <span style="padding: 0 15px;">Information</span>
+      <span>Information</span>
       <div class="dropdown-content">
         <a href="/bank.html">Bank</a>
       </div>
     </div>
   </div>
-
   <div class="navbar-right">
     <div id="auth-container">
+      <span id="user-profile">Loading...</span>
       <button id="login-button" onclick="window.location.href='/login.html'">Login</button>
       <button id="logout-button" onclick="logout()" style="display: none;">Logout</button>
     </div>
   </div>
-  
-  <script type="module">
-    import { setupAuthStateListeners, logout } from "/js/auth.js";
-  
-    // Initialize the authentication state listener
-    setupAuthStateListeners();
-  </script>
-  
+</div>
 
+<!-- Include the auth.js script -->
+<script type="module" src="/js/auth.js"></script>
+<script type="module">
+  import { setupAuthStateListeners } from "/js/auth.js";
+  setupAuthStateListeners();
+</script>
