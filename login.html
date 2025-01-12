@@ -3,41 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link rel="stylesheet" href="styles.css">
-  <script type="module" src="./js/auth.js"></script>
-
+  <title>Login to Ethereal Command</title>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <!-- Navbar -->
-  <div id="header"></div>
-
-  <!-- Login Section -->
-  <div class="auth-container">
-    <h2>Login to Ethereal Command</h2>
+  <div class="login-container">
+    <h1>Login to Ethereal Command</h1>
     <form id="auth-form">
-      <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Password" required />
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
       <button type="submit" id="login-button">Login</button>
+      <p id="error-message" style="color: red; margin-top: 10px;"></p>
     </form>
-    <p id="login-status"></p>
   </div>
 
-  <script src="/header.html"></script> <!-- Fetch your header if needed -->
-  <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js"></script>
-  <script src="/js/auth.js" type="module"></script>
-  <script>
-    document.getElementById("auth-form").addEventListener("submit", async (e) => {
+  <!-- Import the Firebase Authentication logic -->
+  <script type="module">
+    import { login } from '/js/auth.js';
+
+    // Attach the login function to the form's submit event
+    document.getElementById('auth-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorMessageElement = document.getElementById('error-message');
+
       try {
-        await login(email, password);
-        document.getElementById("login-status").textContent = "Login successful! Redirecting...";
-        window.location.href = "/index.html"; // Redirect to the homepage
+        errorMessageElement.textContent = ''; // Clear previous error
+        await login(email, password); // Call the login function from auth.js
       } catch (error) {
-        document.getElementById("login-status").textContent = `Error: ${error.message}`;
+        errorMessageElement.textContent = `Error: ${error.message}`; // Display error message
+        console.error('Login failed:', error);
       }
     });
   </script>
