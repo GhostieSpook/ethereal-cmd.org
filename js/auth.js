@@ -1,6 +1,8 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+// Import the required Firebase modules
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js";
 
+// Firebase configuration (replace with your actual Firebase config)
 const firebaseConfig = {
   apiKey: "AIzaSyDiM4M43xo-oolH9XdQyrgg7agUkMnZeBg",
   authDomain: "ethereal-command-site.firebaseapp.com",
@@ -8,47 +10,21 @@ const firebaseConfig = {
   storageBucket: "ethereal-command-site.appspot.com",
   messagingSenderId: "952627774206",
   appId: "1:952627774206:web:e00951cf33aaf2deb41baf",
-  measurementId: "G-QQSB7ZYHN9"
+  measurementId: "G-QQSB7ZYHN9",
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
 
-window.login = async function () {
+// Login function
+export async function login(email, password) {
   try {
-    const result = await signInWithPopup(auth, provider);
-    console.log("Logged in as:", result.user.displayName);
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    console.log("User logged in:", userCredential.user);
+    return userCredential.user;
   } catch (error) {
     console.error("Login error:", error);
+    throw error;
   }
-};
-
-
-window.logout = async function () {
-  try {
-    await signOut(auth);
-    console.log("User signed out successfully.");
-  } catch (error) {
-    console.error("Error signing out:", error);
-  }
-};
-
-// Monitor Auth State
-onAuthStateChanged(auth, (user) => {
-  const loginBtn = document.getElementById("login-btn");
-  const logoutBtn = document.getElementById("logout-btn");
-  const userProfile = document.getElementById("user-profile");
-
-  if (user) {
-    // User is logged in
-    loginBtn.style.display = "none";
-    logoutBtn.style.display = "block";
-    userProfile.innerHTML = `<p>Welcome, ${user.displayName || "User"}!</p>`;
-  } else {
-    // User is logged out
-    loginBtn.style.display = "block";
-    logoutBtn.style.display = "none";
-    userProfile.innerHTML = "";
-  }
-});
+}
