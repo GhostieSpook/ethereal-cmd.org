@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,141 +12,143 @@
   <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js"></script>
   <script type="module" src="/js/auth.js" defer></script>
   <script src="/js/auth.js" type="module"></script>
-<script>
-  document.getElementById("auth-form").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    await login(email, password);
-  });
-</script>
-
-
-
-  
-
-  
-
+  <script>
+    document.getElementById("auth-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      await login(email, password);
+    });
+  </script>
   <style>
-  .container {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px;
-  }
+    .container {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px;
+    }
 
-  .sidebar {
-    width: 15%;
-    background-color: #222;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
+    .sidebar {
+      width: 15%;
+      background-color: #222;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 
-  .sidebar h2, .sidebar h3 {
-    color: #fff;
-    margin-bottom: 10px;
-  }
+    .sidebar h2,
+    .sidebar h3 {
+      color: #fff;
+      margin-bottom: 10px;
+    }
 
-  .members-container {
-    display: flex;
-    flex-direction: column; /* Align items in a column */
-    gap: 20px; /* Space between items */
-    max-width: 300px; /* Adjust the width as needed */
-    margin: 0 auto; /* Center the container */
-    padding: 10px;
-}
+    .members-container {
+      display: flex;
+      flex-direction: column;
+      /* Align items in a column */
+      gap: 20px;
+      /* Space between items */
+      max-width: 300px;
+      /* Adjust the width as needed */
+      margin: 0 auto;
+      /* Center the container */
+      padding: 10px;
+    }
 
-  .member-box {
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #292929;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
+    .member-box {
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #292929;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 
-  .events-container .event {
-    margin-bottom: 20px;
-    background-color: #292929;
-    padding: 20px;
-    border-radius: 10px;
-  }
+    .events-container .event {
+      margin-bottom: 20px;
+      background-color: #292929;
+      padding: 20px;
+      border-radius: 10px;
+    }
 
-  .main-content {
-    flex: 1;
-    margin-left: 20px;
-    background-color: #222;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
+    .main-content {
+      flex: 1;
+      margin-left: 20px;
+      background-color: #222;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 
-  .news-item {
-    background-color: #292929;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
+    .news-item {
+      background-color: #292929;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
 
-  .news-item h3 {
-    margin-bottom: 10px;
-    color: #fff;
-  }
+    .news-item h3 {
+      margin-bottom: 10px;
+      color: #fff;
+    }
 
-  .news-item p {
-    color: #aaa;
-  }
+    .news-item p {
+      color: #aaa;
+    }
 
-  .member-card {
-    display: flex; /* Flex layout for alignment */
-    align-items: center; /* Vertically align image and text */
-    padding: 10px;
-    background-color: #292929;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+    .member-card {
+      display: flex;
+      /* Flex layout for alignment */
+      align-items: center;
+      /* Vertically align image and text */
+      padding: 10px;
+      background-color: #292929;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 
-.member-card img {
-    border-radius: 50%;
-    margin-right: 10px;
-    width: 50px;
-    height: 50px;
-}
+    .member-card img {
+      border-radius: 50%;
+      margin-right: 10px;
+      width: 50px;
+      height: 50px;
+    }
 
-  .member-card .member-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center; /* Center the text horizontally */
-  }
+    .member-card .member-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      /* Center the text horizontally */
+    }
 
-  .member-card h3,
-.member-card p {
-    margin: 0; /* Remove default margins */
-}
+    .member-card h3,
+    .member-card p {
+      margin: 0;
+      /* Remove default margins */
+    }
 
-  .members-container, .events-container {
-    margin-top: 10px;
-  }
-
-
-</style>
+    .members-container,
+    .events-container {
+      margin-top: 10px;
+    }
+  </style>
 
 </head>
+
 <body>
 
   <div id="header"></div>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-        fetch("header.html")
-            .then((response) => response.text())
-            .then((html) => {
-                document.getElementById("header").innerHTML = html;
-            })
-            .catch((error) => {
-                console.error("Error loading header:", error);
-            });
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((html) => {
+          document.getElementById("header").innerHTML = html;
+        })
+        .catch((error) => {
+          console.error("Error loading header:", error);
+        });
     });
-</script>
+  </script>
 
   <!-- Main Content -->
   <div class="container">
@@ -161,37 +164,37 @@
         </div>
       </div>
 
-      
-    
+
+
 
       <!-- Newest Members -->
 
-        <h2>Newest Members</h2>
-        <div id="newest-members" class="members-container">
-          <!-- Newest members will be dynamically loaded here -->
+      <h2>Newest Members</h2>
+      <div id="newest-members" class="members-container">
+        <!-- Newest members will be dynamically loaded here -->
       </div>
-      
-      
-      
+
+
+
     </div>
 
     <!-- Main Content Area -->
     <div class="main-content">
-        <h2>Ethereal CMD News Feed</h2>
-        <div id="blog-posts">
-          <h2>Latest Blog Posts</h2>
-          <!-- Blog posts will be dynamically loaded here -->
+      <h2>Ethereal CMD News Feed</h2>
+      <div id="blog-posts">
+        <h2>Latest Blog Posts</h2>
+        <!-- Blog posts will be dynamically loaded here -->
       </div>
-            
-      </div>
-    </div>
 
- 
+    </div>
+  </div>
+
+
 
   </div>
 
   <script>
-    
+
     // Fetch and Display the Latest 5 Members from members.html
     async function fetchMembers() {
       try {
@@ -230,22 +233,22 @@
     fetchMembers();
 
 
-      fetch('news.html')
-  .then(response => response.text())
-  .then(html => {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-    const newsArticles = doc.querySelectorAll('.news-article');
-    const newsContainer = document.querySelector('.main-content');
-    newsArticles.forEach(article => {
-      newsContainer.appendChild(article.cloneNode(true));
-    });
-  })
-  .catch(error => console.error('Error fetching news:', error));
+    fetch('news.html')
+      .then(response => response.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const newsArticles = doc.querySelectorAll('.news-article');
+        const newsContainer = document.querySelector('.main-content');
+        newsArticles.forEach(article => {
+          newsContainer.appendChild(article.cloneNode(true));
+        });
+      })
+      .catch(error => console.error('Error fetching news:', error));
 
-// Pull events from events.js and display them
-        async function fetchEvents() {
-          try {
+    // Pull events from events.js and display them
+    async function fetchEvents() {
+      try {
         const response = await fetch('/events.js');
         const scriptContent = await response.text();
         const events = JSON.parse(scriptContent.match(/var events = (\[.*\]);/)[1]);
@@ -262,17 +265,17 @@
           `;
           eventsContainer.appendChild(eventItem);
         });
-          } catch (error) {
+      } catch (error) {
         console.error("Error fetching events:", error);
         document.getElementById('events-container').textContent = "Failed to load events.";
-          }
-        }
-        fetchEvents();
+      }
+    }
+    fetchEvents();
 
   </script>
-  
-        
-        <!-- Footer -->
+
+
+  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Ethereal Command</p>
     <p>
@@ -282,8 +285,10 @@
     <p>
       This site is not endorsed by or affiliated with the Cloud Imperium or Roberts Space Industries group of companies.
       All game content and materials are copyright Cloud Imperium Rights LLC and Cloud Imperium Rights Ltd.
-      Star Citizen&reg;, Squadron 42&reg;, Roberts Space Industries&reg;, and Cloud Imperium&reg; are registered trademarks of Cloud Imperium Rights LLC. All rights reserved.
+      Star Citizen&reg;, Squadron 42&reg;, Roberts Space Industries&reg;, and Cloud Imperium&reg; are registered
+      trademarks of Cloud Imperium Rights LLC. All rights reserved.
     </p>
   </footer>
 </body>
+
 </html>

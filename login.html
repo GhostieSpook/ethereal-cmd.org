@@ -23,19 +23,23 @@
 
     // Attach the login function to the form's submit event
     document.getElementById('auth-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const errorMessageElement = document.getElementById('error-message');
+  e.preventDefault();
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const errorMessageElement = document.getElementById('error-message');
 
-      try {
-        errorMessageElement.textContent = ''; // Clear previous error
-        await login(email, password); // Call the login function from auth.js
-      } catch (error) {
-        errorMessageElement.textContent = `Error: ${error.message}`; // Display error message
-        console.error('Login failed:', error);
-      }
-    });
+  try {
+    errorMessageElement.textContent = ''; // Clear previous error
+    const user = await login(email, password); // Call the login function from auth.js
+    console.log("User logged in:", user);
+
+    // Redirect to homepage after successful login
+    window.location.href = "/index.html";
+  } catch (error) {
+    errorMessageElement.textContent = `Error: ${error.message}`; // Display error message
+    console.error('Login failed:', error);
+  }
+});    
   </script>
 </body>
 </html>

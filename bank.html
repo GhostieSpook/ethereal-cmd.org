@@ -134,7 +134,17 @@ async function fetchBankData() {
 }
 
 document.addEventListener('DOMContentLoaded', fetchBankData);
+</script>
+<script type="module">
+  import { getAuth } from "firebase/auth";
 
+  const auth = getAuth();
+  auth.onAuthStateChanged((user) => {
+    if (!user) {
+      // Redirect to login page if not authenticated
+      window.location.href = "/login.html";
+    }
+  });
   </script>
 
   <!-- Footer -->
