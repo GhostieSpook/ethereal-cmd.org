@@ -25,10 +25,17 @@
     <div class="dropdown">
       <a href="/account.html">👤</a>
       <div class="dropdown-content">
+        <button id="login-btn">Login</button>
+        <button id="logout-btn" style="display: none;">Logout</button>
+        <div id="user-profile"></div>
         <a href="https://ethereal-cmd.cloudflareaccess.com/cdn-cgi/access/logout">Log Out</a>
       </div>
   </div>
+  
+  <script src="https://cdn.auth0.com/js/auth0/9.19/auth0.min.js"></script>
+<script src="/js/auth.js"></script>
 
+  
   <!-- <a href="#">🔔</a>
   <div id="notification-popup" class="popup">
     <div class="popup-content">
