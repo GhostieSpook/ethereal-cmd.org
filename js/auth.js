@@ -1,16 +1,16 @@
-// Import the Firebase modules
+// Import Firebase libraries
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 
-// Firebase configuration
+// Your Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDiM4M43xo-oolH9XdQyrgg7agUkMnZeBg",
   authDomain: "ethereal-command-site.firebaseapp.com",
   projectId: "ethereal-command-site",
-  storageBucket: "ethereal-command-site.firebasestorage.app",
+  storageBucket: "ethereal-command-site.appspot.com",
   messagingSenderId: "952627774206",
   appId: "1:952627774206:web:e00951cf33aaf2deb41baf",
-  measurementId: "G-QQSB7ZYHN9",
+  measurementId: "G-QQSB7ZYHN9"
 };
 
 // Initialize Firebase
@@ -18,46 +18,42 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// Login function
-export function login() {
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      const user = result.user;
-      console.log("Logged in user:", user);
-      document.getElementById("login-btn").style.display = "none";
-      document.getElementById("logout-btn").style.display = "block";
-      document.getElementById("user-profile").innerHTML = `Hello, ${user.displayName}`;
-    })
-    .catch((error) => {
-      console.error("Login error:", error);
-    });
-}
+// DOM Elements
+const loginBtn = document.getElementById("login-btn");
+const logoutBtn = document.getElementById("logout-btn");
+const userProfile = document.getElementById("user-profile");
 
-// Logout function
-export function logout() {
-  signOut(auth)
-    .then(() => {
-      console.log("Logged out");
-      document.getElementById("login-btn").style.display = "block";
-      document.getElementById("logout-btn").style.display = "none";
-      document.getElementById("user-profile").innerHTML = "";
-    })
-    .catch((error) => {
-      console.error("Logout error:", error);
-    });
-}
+// Login Function
+window.login = async function () {
+  try {
+    await signInWithPopup(auth, provider);
+    console.log("User signed in successfully.");
+  } catch (error) {
+    console.error("Error signing in:", error);
+  }
+};
 
-// Handle auth state changes
+// Logout Function
+window.logout = async function () {
+  try {
+    await signOut(auth);
+    console.log("User signed out successfully.");
+  } catch (error) {
+    console.error("Error signing out:", error);
+  }
+};
+
+// Monitor Auth State
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    console.log("User is signed in:", user);
-    document.getElementById("login-btn").style.display = "none";
-    document.getElementById("logout-btn").style.display = "block";
-    document.getElementById("user-profile").innerHTML = `Hello, ${user.displayName}`;
+    // User is logged in
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "block";
+    userProfile.innerHTML = `<p>Welcome, ${user.displayName || "User"}!</p>`;
   } else {
-    console.log("No user is signed in.");
-    document.getElementById("login-btn").style.display = "block";
-    document.getElementById("logout-btn").style.display = "none";
-    document.getElementById("user-profile").innerHTML = "";
+    // User is logged out
+    loginBtn.style.display = "block";
+    logoutBtn.style.display = "none";
+    userProfile.innerHTML = "";
   }
 });

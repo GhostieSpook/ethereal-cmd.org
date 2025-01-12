@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ethereal Command Homepage</title>
   <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/styles.css">
   <script src="/js/blog.js" defer></script>
   <script src="/js/events.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"></script>
+  <script src="/js/events.js" defer></script>
   <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js"></script>
-  <script type="module" src="/js/auth.js"></script>
+  <script type="module" src="/js/auth.js" defer></script>
+
 
   
 
@@ -226,7 +226,7 @@
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
     const newsArticles = doc.querySelectorAll('.news-article');
-    const newsContainer = document.querySelector('.news-container');
+    const newsContainer = document.querySelector('.main-content');
     newsArticles.forEach(article => {
       newsContainer.appendChild(article.cloneNode(true));
     });
@@ -237,7 +237,8 @@
         async function fetchEvents() {
           try {
         const response = await fetch('/events.js');
-        const events = await response.json();
+        const scriptContent = await response.text();
+        const events = JSON.parse(scriptContent.match(/var events = (\[.*\]);/)[1]);
         const eventsContainer = document.getElementById('events-container');
         eventsContainer.innerHTML = ''; // Clear loading text
 
