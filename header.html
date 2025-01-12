@@ -21,34 +21,17 @@
   </div>
 
   <div class="navbar-right">
-    <span id="user-profile" style="padding-right: 15px;">Loading...</span>
-    <button id="login-button" style="display: none;" onclick="window.location.href='/login.html'">Login</button>
-    <button id="logout-button" style="display: none;">Logout</button>
+    <div id="auth-container">
+      <button id="login-button" onclick="window.location.href='/login.html'">Login</button>
+      <button id="logout-button" onclick="logout()" style="display: none;">Logout</button>
+    </div>
   </div>
-</div>
+  
+  <script type="module">
+    import { setupAuthStateListeners, logout } from "/js/auth.js";
+  
+    // Initialize the authentication state listener
+    setupAuthStateListeners();
+  </script>
+  
 
-<script type="module">
-  import { logout, getCurrentUser } from "/js/auth.js";
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const userProfile = document.getElementById("user-profile");
-    const loginButton = document.getElementById("login-button");
-    const logoutButton = document.getElementById("logout-button");
-
-    const user = getCurrentUser();
-
-    if (user) {
-      userProfile.textContent = `Logged in as: ${user.email}`;
-      loginButton.style.display = "none";
-      logoutButton.style.display = "block";
-
-      logoutButton.addEventListener("click", () => {
-        logout();
-      });
-    } else {
-      userProfile.textContent = "Not logged in.";
-      loginButton.style.display = "block";
-      logoutButton.style.display = "none";
-    }
-  });
-</script>

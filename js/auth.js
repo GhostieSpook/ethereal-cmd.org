@@ -1,12 +1,5 @@
-// Import Firebase functions
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -23,52 +16,47 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// Function to log in a user
+// Function to handle user state changes
+export function setupAuthStateListeners() {
+  const userProfile = document.getElementById("user-profile");
+  const loginButton = document.getElementById("login-button");
+  const logoutButton = document.getElementById("logout-button");
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log("User logged in:", user.email);
+      userProfile.textContent = `Logged in as: ${user.email}`;
+      loginButton.style.display = "none";
+      logoutButton.style.display = "block";
+    } else {
+      console.log("No user logged in");
+      userProfile.textContent = "Not logged in.";
+      loginButton.style.display = "block";
+      logoutButton.style.display = "none";
+    }
+  });
+}
+
+// Login function
 export async function login(email, password) {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    console.log("User logged in:", userCredential.user);
-    return userCredential.user;
+    console.log("Login successful:", userCredential.user.email);
+    window.location.href = "/index.html"; // Redirect to homepage after login
   } catch (error) {
-    console.error("Login error:", error);
-    throw error;
+    console.error("Login error:", error.message);
+    alert("Login failed: " + error.message);
   }
 }
 
-// Function to create a new user
-export async function register(email, password) {
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    console.log("User registered:", userCredential.user);
-    return userCredential.user;
-  } catch (error) {
-    console.error("Registration error:", error);
-    throw error;
-  }
-}
-
-// Function to log out a user
+// Logout function
 export async function logout() {
   try {
     await signOut(auth);
-    console.log("User logged out.");
+    console.log("Logout successful");
     window.location.href = "/login.html"; // Redirect to login page after logout
   } catch (error) {
-    console.error("Logout error:", error);
-    throw error;
+    console.error("Logout error:", error.message);
+    alert("Logout failed: " + error.message);
   }
 }
-
-// Function to get the currently logged-in user
-export function getCurrentUser() {
-  return auth.currentUser;
-}
-
-// Listener for authentication state changes
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    console.log("Auth state changed: User is logged in:", user.email);
-  } else {
-    console.log("Auth state changed: No user logged in.");
-  }
-});
