@@ -1,50 +1,53 @@
 let auth0 = null;
 
-async function configureClient() {
+window.onload = async () => {
     auth0 = await createAuth0Client({
-        domain: "ethereal-cmd.org",
+        domain: "dev-2mx1gr7ts6d14aio.us.auth0.com",
         client_id: "dTyeFWsbMPv1AO24B1Iz6gF5Tz3O8GDa",
-        redirect_uri: window.location.origin
     });
-}
 
+    console.log("Auth0 initialized:", auth0); // Debug message
+
+    const isAuthenticated = await auth0.isAuthenticated();
+    const loginButton = document.getElementById("login-btn");
+    const logoutButton = document.getElementById("logout-btn");
+
+    if (isAuthenticated) {
+        // User is logged in
+        loginButton.style.display = "none";
+        logoutButton.style.display = "block";
+        const user = await auth0.getUser();
+        document.getElementById("user-profile").textContent = `Welcome, ${user.name}`;
+    } else {
+        // User is logged out
+        loginButton.style.display = "block";
+        logoutButton.style.display = "none";
+    }
+};
+
+// Login function
 async function login() {
-    await auth0.loginWithRedirect();
+    try {
+        await auth0.loginWithRedirect({
+            redirect_uri: window.location.origin,
+        });
+    } catch (err) {
+        console.error("Login failed", err);
+    }
 }
 
 async function logout() {
-    auth0.logout({ returnTo: window.location.origin });
-}
-
-async function handleAuthCallback() {
-    if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
-        await auth0.handleRedirectCallback();
-        window.history.replaceState({}, document.title, "/");
+    try {
+        await auth0.logout({
+            returnTo: window.location.origin,
+        });
+    } catch (err) {
+        console.error("Logout failed", err);
     }
 }
 
-async function checkAuth() {
-    const isAuthenticated = await auth0.isAuthenticated();
 
-    // Update UI based on authentication status
-    const loginBtn = document.getElementById("login-btn");
-    const logoutBtn = document.getElementById("logout-btn");
-    const userProfile = document.getElementById("user-profile");
-
-    if (isAuthenticated) {
-        const user = await auth0.getUser();
-        userProfile.textContent = `Welcome, ${user.name}`;
-        loginBtn.style.display = "none";
-        logoutBtn.style.display = "inline-block";
-    } else {
-        userProfile.textContent = "";
-        loginBtn.style.display = "inline-block";
-        logoutBtn.style.display = "none";
-    }
-}
-
-document.addEventListener("DOMContentLoaded", async () => {
-    await configureClient();
-    await handleAuthCallback();
-    await checkAuth();
-});
+auth0
+  .getIdTokenClaims()
+  .then((claims) => console.log("Auth0 Initialized: ", claims))
+  .catch((err) => console.error("Error initializing Auth0: ", err));
