@@ -1,7 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 
-// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDiM4M43xo-oolH9XdQyrgg7agUkMnZeBg",
   authDomain: "ethereal-command-site.firebaseapp.com",
@@ -35,15 +34,4 @@ export function setupAuthStateListeners() {
       logoutButton.style.display = "none";
     }
   });
-}
-
-// Logout function
-export async function logout() {
-  try {
-    await signOut(auth);
-    console.log("User logged out successfully");
-    window.location.reload(); // Refresh to update UI
-  } catch (error) {
-    console.error("Logout error:", error.message);
-  }
 }
