@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ethereal Command</title>
-  <link rel="stylesheet" href="/styles.css">
-</head>
-<body>
-  <!-- Navbar -->
-  <div id="header"></div>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        fetch("/header.html")
-            .then((response) => response.text())
-            .then((html) => {
-                document.getElementById("header").innerHTML = html;
-            })
-            .catch((error) => {
-                console.error("Error loading header:", error);
-            });
-    });
-</script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ethereal Command</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div id="header"></div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          fetch("/header.html")
+              .then((response) => response.text())
+              .then((html) => {
+                  document.getElementById("header").innerHTML = html;
+              })
+              .catch((error) => {
+                  console.error("Error loading header:", error);
+              });
+      });
+    </script>
 
-<!-- Footer -->
-<footer>
-    <p>&copy; 2025 Ethereal Command</p>
-    <p>
-      <a href="https://robertsspaceindustries.com/orgs/ETHR">RSI Page</a>
-      <a href="https://discord.gg/XvwJ45FDdv">Discord</a>
-    </p>
-    <p>
-      This site is not endorsed by or affiliated with the Cloud Imperium or Roberts Space Industries group of companies.
-      All game content and materials are copyright Cloud Imperium Rights LLC and Cloud Imperium Rights Ltd.
-      Star Citizen&reg;, Squadron 42&reg;, Roberts Space Industries&reg;, and Cloud Imperium&reg; are registered trademarks of Cloud Imperium Rights LLC. All rights reserved.
-    </p>
-  </footer>  
-</body>
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 Ethereal Command</p>
+      <p>
+        <a href="https://robertsspaceindustries.com/orgs/ETHR">RSI Page</a>
+        <a href="https://discord.gg/XvwJ45FDdv">Discord</a>
+      </p>
+      <p>
+        This site is not endorsed by or affiliated with the Cloud Imperium or
+        Roberts Space Industries group of companies. All game content and
+        materials are copyright Cloud Imperium Rights LLC and Cloud Imperium
+        Rights Ltd. Star Citizen&reg;, Squadron 42&reg;, Roberts Space
+        Industries&reg;, and Cloud Imperium&reg; are registered trademarks of
+        Cloud Imperium Rights LLC. All rights reserved.
+      </p>
+    </footer>
+  </body>
 </html>

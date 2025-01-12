@@ -1,97 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ethereal Command Members</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles.css" />
     <script src="/js/members.js"></script>
     <style>
-        .members-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .member-box {
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #292929;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+              .members-container {
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                  gap: 20px;
+                  padding: 20px;
+                  max-width: 1200px;
+                  margin: 0 auto;
+              }
+              .member-box {
+                  padding: 10px;
+                  border-radius: 5px;
+                  background-color: #292929;
+                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="header"></div>
 
     <h1 style="text-align: center;">Organization Members</h1>
     <!-- Members Grid -->
-    <div class="members-container" id="members-list">
-        Loading...
-    </div>
+    <div class="members-container" id="members-list">Loading...</div>
 
     <script>
-async function fetchMembers() {
-    try {
-        const apiKey = 'b344c819e7d7b541728be16ec9c00f29';
-        const sid = 'ethr';
-        const apiUrl = `https://api.starcitizen-api.com/${apiKey}/v1/live/organization_members/${sid}`;
+      async function fetchMembers() {
+          try {
+              const apiKey = 'b344c819e7d7b541728be16ec9c00f29';
+              const sid = 'ethr';
+              const apiUrl = `https://api.starcitizen-api.com/${apiKey}/v1/live/organization_members/${sid}`;
 
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        console.log(data); // Log the raw data to the console
+              const response = await fetch(apiUrl);
+              const data = await response.json();
+              console.log(data); // Log the raw data to the console
 
-        const members = data.data || [];
+              const members = data.data || [];
 
-        const membersList = document.getElementById('members-list');
-        membersList.innerHTML = ''; // Clear loading text
+              const membersList = document.getElementById('members-list');
+              membersList.innerHTML = ''; // Clear loading text
 
-        members.forEach(member => {
-            const listItem = document.createElement('div');
-            listItem.className = 'member-box';
-            listItem.innerHTML = `
-                <img src="${member.image || 'default-image.jpg'}" alt="${member.handle || 'Member'}" style="width: 100px; height: 100px; border-radius: 50%; display: block; margin: 0 auto;"><br>
-                <div style="text-align: center;">
-                    <strong>Name:</strong> ${member.handle || 'N/A'}<br>
-                    <strong>Rank:</strong> ${member.rank || 'N/A'}</span>
-                </div>
-            `;
-            membersList.appendChild(listItem);
-        });
-    } catch (error) {
-        console.error("Error fetching members:", error);
-        document.getElementById('members-list').textContent = "Failed to load members.";
-    }
-}
-fetchMembers();
+              members.forEach(member => {
+                  const listItem = document.createElement('div');
+                  listItem.className = 'member-box';
+                  listItem.innerHTML = `
+                      <img src="${member.image || 'default-image.jpg'}" alt="${member.handle || 'Member'}" style="width: 100px; height: 100px; border-radius: 50%; display: block; margin: 0 auto;"><br>
+                      <div style="text-align: center;">
+                          <strong>Name:</strong> ${member.handle || 'N/A'}<br>
+                          <strong>Rank:</strong> ${member.rank || 'N/A'}</span>
+                      </div>
+                  `;
+                  membersList.appendChild(listItem);
+              });
+          } catch (error) {
+              console.error("Error fetching members:", error);
+              document.getElementById('members-list').textContent = "Failed to load members.";
+          }
+      }
+      fetchMembers();
 
-        // Load header content from external file
-        document.addEventListener("DOMContentLoaded", function () {
-            fetch("header.html")
-            .then((response) => response.text())
-            .then((html) => {
-                document.getElementById("header").innerHTML = html;
-            })
-            .catch((error) => {
-                console.error("Error loading header:", error);
-            });
-        });
+              // Load header content from external file
+              document.addEventListener("DOMContentLoaded", function () {
+                  fetch("header.html")
+                  .then((response) => response.text())
+                  .then((html) => {
+                      document.getElementById("header").innerHTML = html;
+                  })
+                  .catch((error) => {
+                      console.error("Error loading header:", error);
+                  });
+              });
     </script>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Ethereal Command</p>
-        <p>
-            <a href="https://robertsspaceindustries.com/orgs/ETHR">RSI Page</a>
-            <a href="https://discord.gg/XvwJ45FDdv">Discord</a>
-        </p>
-        <p>
-            This site is not endorsed by or affiliated with the Cloud Imperium or Roberts Space Industries group of companies.
-            All game content and materials are copyright Cloud Imperium Rights LLC and Cloud Imperium Rights Ltd.
-            Star Citizen&reg;, Squadron 42&reg;, Roberts Space Industries&reg;, and Cloud Imperium&reg; are registered trademarks of Cloud Imperium Rights LLC. All rights reserved.
-        </p>
+      <p>&copy; 2025 Ethereal Command</p>
+      <p>
+        <a href="https://robertsspaceindustries.com/orgs/ETHR">RSI Page</a>
+        <a href="https://discord.gg/XvwJ45FDdv">Discord</a>
+      </p>
+      <p>
+        This site is not endorsed by or affiliated with the Cloud Imperium or
+        Roberts Space Industries group of companies. All game content and
+        materials are copyright Cloud Imperium Rights LLC and Cloud Imperium
+        Rights Ltd. Star Citizen&reg;, Squadron 42&reg;, Roberts Space
+        Industries&reg;, and Cloud Imperium&reg; are registered trademarks of
+        Cloud Imperium Rights LLC. All rights reserved.
+      </p>
     </footer>
-</body>
+  </body>
 </html>
