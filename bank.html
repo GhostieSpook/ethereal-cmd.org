@@ -132,19 +132,6 @@ async function fetchBankData() {
         tableBody.innerHTML = '<tr><td colspan="5">Failed to load data.</td></tr>';
     }
 }
-
-document.addEventListener('DOMContentLoaded', fetchBankData);
-</script>
-<script type="module">
-  import { getAuth } from "firebase/auth";
-
-  const auth = getAuth();
-  auth.onAuthStateChanged((user) => {
-    if (!user) {
-      // Redirect to login page if not authenticated
-      window.location.href = "/login.html";
-    }
-  });
   </script>
 
   <!-- Footer -->
