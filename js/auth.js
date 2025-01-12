@@ -1,8 +1,8 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "firebase/auth";
+// Import the Firebase modules
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDiM4M43xo-oolH9XdQyrgg7agUkMnZeBg",
   authDomain: "ethereal-command-site.firebaseapp.com",
@@ -18,7 +18,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// Login Function
+// Login function
 export function login() {
   signInWithPopup(auth, provider)
     .then((result) => {
@@ -33,7 +33,7 @@ export function login() {
     });
 }
 
-// Logout Function
+// Logout function
 export function logout() {
   signOut(auth)
     .then(() => {
@@ -47,7 +47,7 @@ export function logout() {
     });
 }
 
-// Listen for Authentication State Changes
+// Handle auth state changes
 onAuthStateChanged(auth, (user) => {
   if (user) {
     console.log("User is signed in:", user);
