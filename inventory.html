@@ -1,60 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ethereal Command Inventory</title>
-  <link rel="stylesheet" href="/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethereal Command Inventory</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/js/inventory.js"></script>
+    <style>
+      h1 {
+        text-align: center;
+      }
+      
+      h2 {
+      font-size: 1.5em;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: #fff; /* Adjust this color based on your theme */
+      text-align: left;
+      text-align: center;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    
+    th {
+      background-color: #444; /* Adjust this color for headers */
+      color: #fff; /* Header text color */
+    }
+    
+    td {
+      background-color: #222; /* Table cell color */
+      color: #ccc; /* Table text color */
+    }
+    </style>
 </head>
 <body>
-    <div id="header"></div>
+  <div id="header"></div>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-          fetch("header.html")
-              .then((response) => response.text())
-              .then((html) => {
-                  document.getElementById("header").innerHTML = html;
-              })
-              .catch((error) => {
-                  console.error("Error loading header:", error);
-              });
+        fetch("header.html")
+          .then((response) => response.text())
+          .then((html) => {
+            document.getElementById("header").innerHTML = html;
+          })
+          .catch((error) => {
+            console.error("Error loading header:", error);
+          });
       });
     </script>
-<main class="container">
-    <h1 style="text-align: center;">Ethereal Command Inventory</h1>
-    <table id="inventory-table">
+    <h1>Ethereal Command Inventory</h1>
+    <div>
+      <h2>In Stock</h2>
+      <table id="in-stock">
         <thead>
           <tr>
             <th>Item ID</th>
             <th>Item Name</th>
-            <th>Variant</th> <!-- New Variant column -->
+            <th>Variant</th>
             <th>Type</th>
             <th>Price</th>
             <th>Stock</th>
             <th>Status</th>
           </tr>
         </thead>
-        <tbody>
-          <!-- Rows will be dynamically populated -->
-        </tbody>
+        <tbody></tbody>
       </table>
-  </main>
-  <footer>
-    <p>&copy; 2025 Ethereal Command</p>
-    <p>
-      <a href="https://robertsspaceindustries.com/orgs/ETHR">RSI Page</a>
-      <a href="https://discord.gg/XvwJ45FDdv">Discord</a>
-    </p>
-    <p>
-      This site is not endorsed by or affiliated with the Cloud Imperium or
-      Roberts Space Industries group of companies. All game content and
-      materials are copyright Cloud Imperium Rights LLC and Cloud Imperium
-      Rights Ltd. Star Citizen&reg;, Squadron 42&reg;, Roberts Space
-      Industries&reg;, and Cloud Imperium&reg; are registered trademarks of
-      Cloud Imperium Rights LLC. All rights reserved.
-    </p>
-  </footer>
-
-  <script src="/js/inventory.js"></script>
+    </div>
+    
+    <div>
+      <h2>Low Stock</h2>
+      <table id="low-stock">
+        <thead>
+          <tr>
+            <th>Item ID</th>
+            <th>Item Name</th>
+            <th>Variant</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    
+    <div>
+      <h2>No Stock</h2>
+      <table id="no-stock">
+        <thead>
+          <tr>
+            <th>Item ID</th>
+            <th>Item Name</th>
+            <th>Variant</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>    
+    <footer>
+      <p>&copy; 2025 Ethereal Command</p>
+      <p>
+        <a href="https://robertsspaceindustries.com/orgs/ETHR">RSI Page</a>
+        <a href="https://discord.gg/XvwJ45FDdv">Discord</a>
+      </p>
+      <p>
+        This site is not endorsed by or affiliated with the Cloud Imperium or
+        Roberts Space Industries group of companies. All game content and
+        materials are copyright Cloud Imperium Rights LLC and Cloud Imperium
+        Rights Ltd. Star Citizen&reg;, Squadron 42&reg;, Roberts Space
+        Industries&reg;, and Cloud Imperium&reg; are registered trademarks of
+        Cloud Imperium Rights LLC. All rights reserved.
+      </p>
+    </footer>
 </body>
 </html>
