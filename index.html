@@ -6,111 +6,135 @@
     <title>Ethereal Command Homepage</title>
     <link rel="stylesheet" href="/styles.css" />
     <script src="/js/blog.js" defer></script>
-    <script src="/js/events.js"></script>
-    <script src="/js/events.js" defer></script>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js"></script>
     <script type="module" src="/js/auth.js" defer></script>
-    <script src="/js/auth.js" type="module"></script>
-    <script>
-      document.getElementById("auth-form").addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-        await login(email, password);
-      });
-    </script>
     <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
       .container {
         display: flex;
         justify-content: space-between;
         margin: 20px;
+        gap: 30px;
+        flex: 1;
       }
 
       .sidebar {
-        width: 15%;
+        width: 25%;
         background-color: #222;
-        padding: 20px;
+        padding: 25px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
 
-      .sidebar h2,
-      .sidebar h3 {
+      .sidebar h2 {
         color: #fff;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+        border-bottom: 2px solid #444;
+        padding-bottom: 10px;
       }
 
       .members-container {
         display: flex;
         flex-direction: column;
-        /* Align items in a column */
-        gap: 20px;
-        /* Space between items */
-        max-width: 300px;
-        /* Adjust the width as needed */
+        gap: 15px;
+        max-width: 100%;
         margin: 0 auto;
-        /* Center the container */
-        padding: 10px;
-      }
-
-      .member-box {
-        padding: 10px;
-        border-radius: 5px;
-        background-color: #292929;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      }
-
-      .events-container .event {
-        margin-bottom: 20px;
-        background-color: #292929;
-        padding: 20px;
-        border-radius: 10px;
-      }
-
-      .main-content {
-        flex: 1;
-        margin-left: 20px;
-        background-color: #222;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
 
       .member-card {
         display: flex;
-        /* Flex layout for alignment */
         align-items: center;
-        /* Vertically align image and text */
-        padding: 10px;
+        padding: 15px;
         background-color: #292929;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        border: 1px solid #333;
+      }
+
+      .member-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        border-color: #444;
       }
 
       .member-card img {
         border-radius: 50%;
-        margin-right: 10px;
-        width: 50px;
-        height: 50px;
+        margin-right: 15px;
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border: 2px solid #444;
       }
 
       .member-card .member-info {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        text-align: center;
-        /* Center the text horizontally */
+        flex: 1;
       }
 
-      .member-card h3,
-      .member-card p {
+      .member-card h3 {
         margin: 0;
-        /* Remove default margins */
+        color: #fff;
+        font-size: 1.1em;
       }
 
-      .members-container,
-      .events-container {
-        margin-top: 10px;
+      .member-card p {
+        margin: 5px 0 0 0;
+        color: #aaa;
+        font-size: 0.9em;
+      }
+
+      .main-content {
+        flex: 1;
+        background-color: #222;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .main-content h2 {
+        color: #fff;
+        margin-bottom: 25px;
+        font-size: 1.8em;
+        border-bottom: 2px solid #444;
+        padding-bottom: 10px;
+      }
+
+      #blog-posts {
+        color: #fff;
+      }
+
+      .blog-post {
+        background-color: #292929;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #333;
+      }
+
+      .blog-post h3 {
+        color: #fff;
+        margin: 0 0 10px 0;
+      }
+
+      .blog-post p {
+        color: #ccc;
+        margin: 0;
+        line-height: 1.6;
       }
     </style>
   </head>
@@ -131,22 +155,9 @@
 
     <!-- Main Content -->
     <div class="container">
-      <!-- Sidebar for Events and Members -->
+      <!-- Sidebar for Members -->
       <div class="sidebar">
-        <h2>Ethereal CMD At a Glance</h2>
-
-        <!-- Upcoming Events -->
-        <div class="events-section">
-          <h2>Upcoming Events</h2>
-          <div id="events-container">
-            <p>Loading events...</p>
-            <!-- Placeholder text while events are fetched -->
-          </div>
-        </div>
-
-        <!-- Newest Members -->
-
-        <h2>Newest Members</h2>
+        <h2>Latest Members</h2>
         <div id="newest-members" class="members-container">
           <!-- Newest members will be dynamically loaded here -->
         </div>
@@ -156,14 +167,13 @@
       <div class="main-content">
         <h2>Ethereal CMD News Feed</h2>
         <div id="blog-posts">
-          <h2>Latest Blog Posts</h2>
           <!-- Blog posts will be dynamically loaded here -->
         </div>
       </div>
     </div>
-    <script>
 
-      // Fetch and Display the Latest 5 Members from members.html
+    <script>
+      // Fetch and Display the Latest 5 Members
       async function fetchMembers() {
         try {
           const apiKey = 'b344c819e7d7b541728be16ec9c00f29';
@@ -172,20 +182,18 @@
 
           const response = await fetch(apiUrl);
           const data = await response.json();
-          console.log(data); // Log the raw data to the console
 
           const members = data.data || [];
-
-          const newestMembers = members.slice(0, 5); // Get the newest 5 members
+          const newestMembers = members.slice(0, 5);
 
           const membersList = document.getElementById('newest-members');
-          membersList.innerHTML = ''; // Clear loading text
+          membersList.innerHTML = '';
 
           newestMembers.forEach(member => {
             const listItem = document.createElement('div');
             listItem.className = 'member-card';
             listItem.innerHTML = `
-              <img src="${member.image || 'default-image.jpg'}" alt="${member.handle || 'Member'}">
+              <img src="${member.image || 'assets/default-avatar.png'}" alt="${member.handle || 'Member'}">
               <div class="member-info">
                 <h3>${member.handle || 'N/A'}</h3>
                 <p>${member.rank || 'N/A'}</p>
@@ -199,48 +207,20 @@
         }
       }
       fetchMembers();
-      // Pull events from events.js and display them
-      async function fetchEvents() {
-        try {
-          const response = await fetch('/events.js');
-          const scriptContent = await response.text();
-          const events = JSON.parse(scriptContent.match(/var events = (\[.*\]);/)[1]);
-          const eventsContainer = document.getElementById('events-container');
-          eventsContainer.innerHTML = ''; // Clear loading text
-
-          events.forEach(event => {
-            const eventItem = document.createElement('div');
-            eventItem.className = 'event';
-            eventItem.innerHTML = `
-              <h3>${event.title}</h3>
-              <p>${event.date}</p>
-              <p>${event.description}</p>
-            `;
-            eventsContainer.appendChild(eventItem);
-          });
-        } catch (error) {
-          console.error("Error fetching events:", error);
-          document.getElementById('events-container').textContent = "Failed to load events.";
-        }
-      }
-      fetchEvents();
     </script>
 
-    <!-- Footer -->
-    <footer>
-      <p>&copy; 2025 Ethereal Command</p>
-      <p>
-        <a href="https://robertsspaceindustries.com/orgs/ETHR">RSI Page</a>
-        <a href="https://discord.gg/XvwJ45FDdv">Discord</a>
-      </p>
-      <p>
-        This site is not endorsed by or affiliated with the Cloud Imperium or
-        Roberts Space Industries group of companies. All game content and
-        materials are copyright Cloud Imperium Rights LLC and Cloud Imperium
-        Rights Ltd. Star Citizen&reg;, Squadron 42&reg;, Roberts Space
-        Industries&reg;, and Cloud Imperium&reg; are registered trademarks of
-        Cloud Imperium Rights LLC. All rights reserved.
-      </p>
-    </footer>
+    <div id="footer"></div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("footer.html")
+          .then((response) => response.text())
+          .then((html) => {
+            document.getElementById("footer").innerHTML = html;
+          })
+          .catch((error) => {
+            console.error("Error loading footer:", error);
+          });
+      });
+    </script>
   </body>
 </html>
