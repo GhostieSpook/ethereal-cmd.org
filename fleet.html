@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ethereal Command - Available Ships</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://apis.google.com/js/api.js"></script>
+    <style>
+      h1 {
+        text-align: center;
+      }
+
+      .ships-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .ship-card {
+        background-color: #222;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: 1px solid #333;
+        transition: transform 0.3s ease;
+      }
+
+      .ship-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .ship-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        background-color: #333;
+      }
+
+      .ship-info h3 {
+        color: #fff;
+        margin: 0 0 10px 0;
+        font-size: 1.4em;
+      }
+
+      .ship-details {
+        color: #ccc;
+        margin: 0;
+      }
+
+      .ship-details p {
+        margin: 5px 0;
+      }
+
+      .ship-status {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        margin-top: 10px;
+      }
+
+      .status-available {
+        background-color: #2e7d32;
+        color: #fff;
+      }
+
+      .status-in-use {
+        background-color: #f57c00;
+        color: #fff;
+      }
+
+      .status-maintenance {
+        background-color: #c62828;
+        color: #fff;
+      }
+     
+      .status-concept {
+  background-color: #c62828;
+  color: #fff;
+}
+
+      .loading {
+        text-align: center;
+        color: #fff;
+        padding: 20px;
+        font-size: 1.2em;
+      }
+
+      .error {
+        text-align: center;
+        color: #c62828;
+        padding: 20px;
+        font-size: 1.2em;
+      }
+
+      .api-setup-required {
+        background-color: #222;
+        color: #fff;
+        padding: 20px;
+        margin: 20px;
+        border-radius: 10px;
+        border: 1px solid #333;
+      }
+
+      .api-setup-required h2 {
+        color: #4a9eff;
+        margin-top: 0;
+      }
+
+      .api-setup-required code {
+        background-color: #333;
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header"></div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("header.html")
+          .then((response) => response.text())
+          .then((html) => {
+            document.getElementById("header").innerHTML = html;
+          })
+          .catch((error) => {
+            console.error("Error loading header:", error);
+          });
+      });
+    </script>
+<h1>Ethereal Command Fleet</h1>
+    <div class="page-wrapper">
+      <div id="ships-container">
+        <div class="api-setup-required">
+          <h2>Google Sheets API Setup Required</h2>
+          <p>To display your fleet's ships, you need to:</p>
+          <ol>
+            <li>Create a Google Sheet with these columns:
+              <ul>
+                <li>Ship Name</li>
+                <li>Role</li>
+                <li>Crew Size</li>
+                <li>Ship Size</li>
+                <li>Features</li>
+                <li>Status</li>
+                <li>Image URL</li>
+              </ul>
+            </li>
+            <li>Get your Google Sheets API key from the <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></li>
+            <li>Update these values in the code:
+              <pre><code>const SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID';
+const API_KEY = 'YOUR_API_KEY';</code></pre>
+            </li>
+          </ol>
+          <p>For now, here are some example ships:</p>
+        </div>
+
+        <div class="ships-container">
+          <!-- Example ship cards -->
+          <div class="ship-card">
+            <img src="https://robertsspaceindustries.com/media/example-carrack.jpg" alt="Carrack" class="ship-image" onerror="this.src='https://via.placeholder.com/300x200?text=Carrack'">
+            <div class="ship-info">
+              <h3>Carrack</h3>
+              <div class="ship-details">
+                <p><strong>Role:</strong> Exploration</p>
+                <p><strong>Crew:</strong> 6</p>
+                <p><strong>Size:</strong> Large</p>
+                <p><strong>Features:</strong> Medical Bay, Repair Bay, Cargo</p>
+              </div>
+              <span class="ship-status status-available">Available</span>
+            </div>
+          </div>
+
+          <div class="ship-card">
+            <img src="https://robertsspaceindustries.com/media/example-hammerhead.jpg" alt="Hammerhead" class="ship-image" onerror="this.src='https://via.placeholder.com/300x200?text=Hammerhead'">
+            <div class="ship-info">
+              <h3>Hammerhead</h3>
+              <div class="ship-details">
+                <p><strong>Role:</strong> Gunship</p>
+                <p><strong>Crew:</strong> 8</p>
+                <p><strong>Size:</strong> Large</p>
+                <p><strong>Features:</strong> Heavy Turrets, Cargo Bay</p>
+              </div>
+              <span class="ship-status status-in-use">In Use</span>
+            </div>
+          </div>
+
+          <div class="ship-card">
+            <img src="https://robertsspaceindustries.com/media/example-mercury.jpg" alt="Mercury Star Runner" class="ship-image" onerror="this.src='https://via.placeholder.com/300x200?text=Mercury'">
+            <div class="ship-info">
+              <h3>Mercury Star Runner</h3>
+              <div class="ship-details">
+                <p><strong>Role:</strong> Data Running</p>
+                <p><strong>Crew:</strong> 3</p>
+                <p><strong>Size:</strong> Medium</p>
+                <p><strong>Features:</strong> Data Storage, Cargo, Scanning</p>
+              </div>
+              <span class="ship-status status-available">Available</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Replace these with your actual Google Sheet ID and API key
+      const SPREADSHEET_ID = '1PcY-k43kBYRI-xHyDxw5ThPdhR5jX3GXnW7j2qiWlK0';
+      const API_KEY = 'AIzaSyBF2AJ6uYX2PZrpcFq3yFnD8DbZ410TOEk';
+      const RANGE = 'Ships!A2:H'; // Now columns A-H are used: Name, Role, Crew, Size, Owner, Status, Image URL
+
+      async function loadShips() {
+        const shipsContainer = document.getElementById('ships-container');
+        shipsContainer.innerHTML = '<div class="loading">Loading ships...</div>';
+
+        try {
+          console.log('Fetching data from Google Sheets...');
+          const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${API_KEY}`;
+          console.log('Request URL:', url);
+          
+          const response = await fetch(url);
+          console.log('Response status:', response.status);
+          
+          if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Error response:', errorText);
+            throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+          }
+          
+          const data = await response.json();
+          console.log('Received data:', data);
+          
+          if (!data.values || data.values.length === 0) {
+            throw new Error('No data found in the spreadsheet. Please check if the sheet "Ships" exists and has data starting from cell A2.');
+          }
+
+          shipsContainer.innerHTML = '<div class="ships-container"></div>';
+          const shipsGrid = shipsContainer.querySelector('.ships-container');
+
+          data.values.forEach((row, index) => {
+            console.log(`Processing row ${index + 1}:`, row);
+            const [name, role, crew, size, owner, status, imageUrl] = row;
+            
+            if (!name) {
+              console.warn(`Skipping row ${index + 1} - missing ship name`);
+              return;
+            }
+
+            const shipCard = document.createElement('div');
+            shipCard.className = 'ship-card';
+            
+            shipCard.innerHTML = `
+              <img src="${imageUrl || 'https://via.placeholder.com/300x200?text=' + name}" 
+                   alt="${name}" 
+                   class="ship-image"
+                   onerror="this.src='https://via.placeholder.com/300x200?text=${name}'">
+              <div class="ship-info">
+                <h3>${name}</h3>
+                <div class="ship-details">
+                  <p><strong>Role:</strong> ${role || 'N/A'}</p>
+                  <p><strong>Crew:</strong> ${crew || 'N/A'}</p>
+                  <p><strong>Size:</strong> ${size || 'N/A'}</p>
+                  <p><strong>Owner:</strong> ${owner || 'N/A'}</p>
+                </div>
+                <span class="ship-status status-${(status || 'available').toLowerCase().replace(/\\s+/g, '-')}">${status || 'Available'}</span>
+              </div>
+            `;
+            
+            shipsGrid.appendChild(shipCard);
+          });
+        } catch (error) {
+          console.error('Error loading ships:', error);
+          shipsContainer.innerHTML = `
+            <div class="error">
+              <h2>Error Loading Ships</h2>
+              <p>${error.message}</p>
+              <p>Please check:</p>
+              <ul>
+                <li>Your Google Sheet is properly set up with the required columns</li>
+                <li>The API key has access to the Google Sheets API</li>
+                <li>The spreadsheet ID is correct</li>
+                <li>The sheet name "Ships" exists</li>
+              </ul>
+              <p>Technical details:</p>
+              <pre>${error.stack}</pre>
+            </div>
+          `;
+        }
+      }
+
+      // Load ships when the page loads
+      document.addEventListener('DOMContentLoaded', loadShips);
+    </script>
+
+    <div id="footer"></div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("footer.html")
+          .then((response) => response.text())
+          .then((html) => {
+            document.getElementById("footer").innerHTML = html;
+          })
+          .catch((error) => {
+            console.error("Error loading footer:", error);
+          });
+      });
+    </script>
+  </body>
+</html>
