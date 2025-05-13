@@ -11,6 +11,14 @@ html, body {
   margin: 0;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
 /* Navbar Styles */
@@ -154,22 +162,31 @@ th {
 
 /* Footer Styles */
 footer {
-  margin-top: auto;
-  padding: 20px;
-  background-color: #000000;
+  background-color: #222;
   color: #fff;
+  padding: 14px 8px;
+  margin-top: auto;
   text-align: center;
-  width: 100%;
+  border-top: 1px solid #333;
+  font-size: 0.85em;
+  line-height: 1.3;
 }
 
 footer a {
-  color: #fff;
+  color: #4a9eff;
   text-decoration: none;
   margin: 0 10px;
+  transition: color 0.3s ease;
 }
 
 footer a:hover {
-  text-decoration: underline;
+  color: #6fb1ff;
+}
+
+footer p {
+  margin: 6px 0;
+  color: #aaa;
+  font-size: 0.95em;
 }
 
 /* Member Card Styles */
@@ -362,3 +379,51 @@ button:hover {
   font-size: 0.9rem;
   margin-top: 10px;
 }
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  gap: 30px;
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    width: 100%;
+    max-width: 100%;
+  }
+  .sidebar, .main-content {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.ships-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;   /* Horizontally center cards */
+  align-items: center;       /* Vertically center cards */
+  gap: 20px;
+  padding: 20px;
+  margin: 0 auto;
+      /* Optional: ensures some vertical space */
+}
+
+.status-in-concept {
+  background-color: #c62828;
+  color: #fff;
+}
+
+.status-concept {
+  background-color: #c62828;
+  color: #fff;
+}
+
