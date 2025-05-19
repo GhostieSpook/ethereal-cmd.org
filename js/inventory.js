@@ -27,13 +27,12 @@ async function fetchInventoryData() {
           col.replace(/^"|"$/g, "").trim()
         );
 
-        const itemId = columns[0] || "N/A";
-        const itemName = columns[1] || "N/A";
-        const variant = columns[2] || "Default";
-        const type = columns[3] || "N/A";
-        const price = columns[4] || "N/A";
-        let stock = columns[5] || "0";
-        const status = columns[6] || "N/A";
+        const itemName = columns[0] || "N/A";
+        const variant = columns[1] || "Default";
+        const type = columns[2] || "N/A";
+        const price = columns[3] || "N/A";
+        let stock = columns[4] || "0";
+        const status = columns[5] || "N/A";
 
         // Convert stock to integer
         stock = parseInt(stock, 10);
@@ -41,7 +40,6 @@ async function fetchInventoryData() {
         // Create the table row
         const tr = document.createElement("tr");
         tr.innerHTML = `
-            <td>${itemId}</td>
             <td>${itemName}</td>
             <td>${variant}</td>
             <td>${type}</td>
@@ -69,9 +67,9 @@ async function fetchInventoryData() {
     });
   } catch (error) {
     console.error("Error fetching inventory data:", error);
-    inStockTable.innerHTML = `<tr><td colspan="7">Failed to load data.</td></tr>`;
-    lowStockTable.innerHTML = `<tr><td colspan="7">Failed to load data.</td></tr>`;
-    noStockTable.innerHTML = `<tr><td colspan="7">Failed to load data.</td></tr>`;
+    inStockTable.innerHTML = `<tr><td colspan="6">Failed to load data.</td></tr>`;
+    lowStockTable.innerHTML = `<tr><td colspan="6">Failed to load data.</td></tr>`;
+    noStockTable.innerHTML = `<tr><td colspan="6">Failed to load data.</td></tr>`;
   }
 }
 
