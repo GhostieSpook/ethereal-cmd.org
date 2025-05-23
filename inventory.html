@@ -1,127 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ethereal Command Inventory</title>
-    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
-    <link rel="stylesheet" href="/styles.css">
-    <script src="/js/inventory.js"></script>
-    <style>
-      h1 {
-        text-align: center;
-      }
-      
-      h2 {
-      font-size: 1.5em;
-      margin-top: 20px;
-      margin-bottom: 10px;
-      color: #fff; /* Adjust this color based on your theme */
-      text-align: left;
-      text-align: center;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: #1e1e1e;
+      color: #fff;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
     }
-    
+    .page-title {
+      text-align: center;
+      margin-top: 32px;
+      margin-bottom: 8px;
+      font-size: 2.2em;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+    .search-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+    .search-container input {
+      width: 400px;
+      padding: 10px 16px;
+      border: 2px solid #ffffff;
+      border-radius: 5px;
+      background-color: #292929;
+      color: white;
+      font-size: 18px;
+    }
+    .search-container input:focus {
+      outline: none;
+      border-color: #ffffff;
+    }
+    .main-content {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      max-width: 1800px;
+      margin: 0 auto 40px auto;
+      padding: 0 20px;
+    }
+    .items-section {
+      flex: 2 1 0;
+      min-width: 700px;
+      max-width: 1200px;
+    }
+    .cart-section {
+      flex: 1 1 0;
+      min-width: 340px;
+      max-width: 420px;
+      background: #232323;
+      border-radius: 10px;
+      padding: 28px 28px 20px 28px;
+      margin-top: 0;
+      color: #fff;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+      position: sticky;
+      top: 32px;
+      height: fit-content;
+    }
+    .cart-section strong {
+      color: #ffffff;
+      font-size: 1.2em;
+    }
+    .cart-items {
+      margin: 18px 0 18px 0;
+      padding: 0;
+      list-style: none;
+      color: #fff;
+      font-size: 1em;
+      max-height: 350px;
+      overflow-y: auto;
+    }
+    .cart-items li {
+      margin: 6px 0;
+    }
+    .cart-total {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .clear-cart {
+      background-color: #dc3545;
+      border: none;
+      color: white;
+      padding: 7px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+      margin-top: 8px;
+      margin-bottom: 0;
+      transition: background 0.2s;
+    }
+    .clear-cart:hover {
+      background-color: #c82333;
+    }
+    .section-title {
+      color: #ffffff;
+      margin: 40px 0 10px 0;
+      font-size: 1.3em;
+      text-align: left;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 20px;
+      background: #222;
+      margin-bottom: 40px;
     }
-    
     th, td {
-      padding: 10px;
-      border: 1px solid #ccc;
+      padding: 12px 10px;
+      text-align: left;
+      border-bottom: 1px solid #333;
     }
-    
     th {
-      background-color: #444; /* Adjust this color for headers */
-      color: #fff; /* Header text color */
+      background: #1e1e1e;
+      color: #ffffff;
+      font-weight: 600;
+      border-top: 2px solid #ffffff;
+      font-size: 1.05em;
+      padding-right: 24px;
+      white-space: nowrap;
     }
-    
-    td {
-      background-color: #222; /* Table cell color */
-      color: #ccc; /* Table text color */
+    th.stock-col, td.stock-col {
+      text-align: center;
     }
-    </style>
+    tr:nth-child(even) {
+      background: #232323;
+    }
+    .status-in {
+      color: #28a745;
+      font-weight: bold;
+    }
+    .status-out {
+      color: #dc3545;
+      font-weight: bold;
+    }
+    .add-to-cart-btn {
+      background-color: #00bfff;
+      border: none;
+      color: white;
+      padding: 7px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.2s;
+    }
+    .add-to-cart-btn:hover {
+      background-color: #008cbf;
+    }
+    @media (max-width: 1100px) {
+      .main-content {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .cart-section {
+        max-width: 100%;
+        min-width: 0;
+        margin: 32px auto 0 auto;
+        position: static;
+      }
+      .items-section {
+        min-width: 0;
+        max-width: 100%;
+      }
+    }
+    th.sortable {
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      padding-right: 24px;
+    }
+    .th-arrow {
+      margin-left: 8px;
+      margin-right: 0;
+      min-width: 24px;
+      text-align: right;
+      color: #00bfff;
+      font-size: 0.95em;
+      display: inline-block;
+    }
+    .sort-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+      outline: inherit;
+      color: #ffffff;
+      font-size: 1.1em;
+      margin-left: 8px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  </style>
 </head>
 <body>
   <div id="header"></div>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        fetch("header.html")
-          .then((response) => response.text())
-          .then((html) => {
-            document.getElementById("header").innerHTML = html;
-          })
-          .catch((error) => {
-            console.error("Error loading header:", error);
-          });
-      });
-    </script>
-    <div class="page-wrapper">
-    <h1>Ethereal Command Inventory</h1>
-    <div>
-      <h2>In Stock</h2>
-      <table id="in-stock">
-        <thead>
-          <tr>
-            <th>Item Name</th>
-            <th>Variant</th>
-            <th>Type</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((html) => {
+          document.getElementById("header").innerHTML = html;
+        });
+    });
+  </script>
+  <div class="page-title">Inventory</div>
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search inventory...">
+  </div>
+  <div class="main-content">
+    <div class="items-section">
+      <div class="inventory-section">
+        <div class="section in-stock">
+          <h2>In Stock</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Item Name <button class="sort-btn" data-sort="name">▲▼</button></th>
+                <th>Variant <button class="sort-btn" data-sort="variant">▲▼</button></th>
+                <th>Type</th>
+                <th>Price <button class="sort-btn" data-sort="price">▲▼</button></th>
+                <th>Stock <button class="sort-btn" data-sort="stock">▲▼</button></th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="inStockBody"></tbody>
+          </table>
+        </div>
+        <div class="section out-of-stock">
+          <h2>Out of Stock</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Item Name <button class="sort-btn" data-sort="name">▲▼</button></th>
+                <th>Variant <button class="sort-btn" data-sort="variant">▲▼</button></th>
+                <th>Type</th>
+                <th>Price <button class="sort-btn" data-sort="price">▲▼</button></th>
+                <th>Stock <button class="sort-btn" data-sort="stock">▲▼</button></th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="outOfStockBody"></tbody>
+          </table>
+        </div>
+      </div>
     </div>
-    
-    <div>
-      <h2>Low Stock</h2>
-      <table id="low-stock">
-        <thead>
-          <tr>
-            <th>Item Name</th>
-            <th>Variant</th>
-            <th>Type</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+    <div class="cart-section">
+      <h2>Shopping Cart</h2>
+      <div id="cart"></div>
+      <div class="cart-total">
+        <p>Total: $<span id="cartTotal">0.00</span></p>
+      </div>
+      <button class="clear-cart" id="clearCartBtn">Clear Cart</button>
     </div>
-    
-    <div>
-      <h2>No Stock</h2>
-      <table id="no-stock">
-        <thead>
-          <tr>
-            <th>Item Name</th>
-            <th>Variant</th>
-            <th>Type</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-    </div>
-    <div id="footer"></div>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        fetch("footer.html")
-          .then((response) => response.text())
-          .then((html) => {
-            document.getElementById("footer").innerHTML = html;
-          })
-          .catch((error) => {
-            console.error("Error loading footer:", error);
-          });
-      });
-    </script>
+  </div>
+  <div id="footer"></div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch("footer.html")
+        .then((response) => response.text())
+        .then((html) => {
+          document.getElementById("footer").innerHTML = html;
+        });
+    });
+  </script>
+  <script src="js/inventory.js"></script>
 </body>
 </html>
