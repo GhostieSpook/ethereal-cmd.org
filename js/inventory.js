@@ -2,9 +2,8 @@ const sheetUrl =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQIWrTUegBg8MLszZasF6qH5qD7UxjqQqGSe9iKAkylqPLQHdxnydaY0yMpSuE7e4oMik9dZSqsmHij/pub?gid=0&single=true&output=csv";
 
 async function fetchInventoryData() {
-  const inStockTable = document.querySelector("#in-stock tbody");
-  const lowStockTable = document.querySelector("#low-stock tbody");
-  const noStockTable = document.querySelector("#no-stock tbody");
+  const inStockTable = document.getElementById("inStockBody");
+  const noStockTable = document.getElementById("outOfStockBody");
 
   try {
     const response = await fetch(sheetUrl);
@@ -17,7 +16,6 @@ async function fetchInventoryData() {
 
     // Clear existing rows
     inStockTable.innerHTML = "";
-    lowStockTable.innerHTML = "";
     noStockTable.innerHTML = "";
 
     rows.forEach((row) => {
@@ -44,7 +42,7 @@ async function fetchInventoryData() {
             <td>${variant}</td>
             <td>${type}</td>
             <td>${price}</td>
-            <td>${stock}</td>
+            <td class="stock-col">${stock}</td>
             <td style="color: ${status.toLowerCase() === "out of stock"
             ? "red"
             : status.toLowerCase() === "in stock"
@@ -56,10 +54,8 @@ async function fetchInventoryData() {
         `;
 
         // Categorize and append to the appropriate table
-        if (stock >= 10) {
+        if (stock > 0) {
           inStockTable.appendChild(tr);
-        } else if (stock > 0 && stock < 10) {
-          lowStockTable.appendChild(tr);
         } else {
           noStockTable.appendChild(tr);
         }
@@ -68,7 +64,6 @@ async function fetchInventoryData() {
   } catch (error) {
     console.error("Error fetching inventory data:", error);
     inStockTable.innerHTML = `<tr><td colspan="6">Failed to load data.</td></tr>`;
-    lowStockTable.innerHTML = `<tr><td colspan="6">Failed to load data.</td></tr>`;
     noStockTable.innerHTML = `<tr><td colspan="6">Failed to load data.</td></tr>`;
   }
 }
