@@ -13,10 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('.sort-btn').forEach(btn => {
     btn.addEventListener('click', () => sortInventory(btn.dataset.sort));
   });
-  document.getElementById('clearCartBtn').addEventListener('click', () => {
-    cart = [];
-    updateCart();
-  });
   loadInventory();
 });
 
@@ -112,34 +108,52 @@ function removeFromCart(index) {
 
 function updateCart() {
   const cartElement = document.getElementById('cart');
-  const totalElement = document.getElementById('cartTotal');
-  cartElement.innerHTML = '';
   let total = 0;
+  cart.forEach(item => {
+    total += item.price * item.quantity;
+  });
+
+  // Cart header with total and clear button
+  cartElement.innerHTML = `
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <span id="cartTotal" style="font-weight: bold; font-size: 1.1em;">Total: $${total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+      <button class="clear-cart" id="clearCartBtn">Clear Cart</button>
+    </div>
+  `;
+
+  // Cart items
   cart.forEach((item, index) => {
     const itemTotal = item.price * item.quantity;
-    total += itemTotal;
     const div = document.createElement('div');
     div.className = 'cart-item';
     div.innerHTML = `
       <span>${item.name} (${item.variant})</span>
       <input type="number" min="1" max="${item.stock}" value="${item.quantity}" class="cart-qty-input" data-index="${index}" style="width: 60px; margin: 0 8px;">
       <span>$${itemTotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
-      <button onclick="removeFromCart(${index})">Remove</button>
+      <button onclick="removeFromCart(${index})" class="remove-cart-btn">Remove</button>
     `;
     cartElement.appendChild(div);
   });
+
   // Add event listeners for quantity inputs
-  document.querySelectorAll('.cart-qty-input').forEach(input => {
-    input.addEventListener('change', function() {
-      const idx = parseInt(this.getAttribute('data-index'));
-      let val = parseInt(this.value);
-      if (isNaN(val) || val < 1) val = 1;
-      if (val > cart[idx].stock) val = cart[idx].stock;
-      cart[idx].quantity = val;
+  cartElement.querySelectorAll('.cart-qty-input').forEach(input => {
+    input.addEventListener('change', (e) => {
+      const idx = parseInt(e.target.dataset.index);
+      let newQty = parseInt(e.target.value);
+      if (isNaN(newQty) || newQty < 1) newQty = 1;
+      if (newQty > cart[idx].stock) newQty = cart[idx].stock;
+      cart[idx].quantity = newQty;
       updateCart();
     });
   });
-  totalElement.textContent = total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  // Add event listener for clear cart button
+  const clearBtn = cartElement.querySelector('#clearCartBtn');
+  if (clearBtn) {
+    clearBtn.onclick = () => {
+      cart = [];
+      updateCart();
+    };
+  }
 }
 
 function sortInventory(column) {
